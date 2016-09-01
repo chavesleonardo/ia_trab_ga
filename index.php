@@ -24,14 +24,14 @@
 				<div clas="row">
 					<p>
 						Origem:
-						<input type="text" name="origem">
+						<input type="text" name="origem" value="<?php echo $_POST['origem']; ?>">
 					</p>
 					
 				</div>
 				<div clas="row">
 					<p>
 						Destino: 
-						<input type="text" name="destino">
+						<input type="text" name="destino" value="<?php echo $_POST['destino']; ?>">
 					</p>
 				</div>
 				<div class="row">
@@ -81,8 +81,8 @@
         }
 
     </script>
-
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl8qjiJLd7KBxiKB0-2lRej5o96NYigIA&signed_in=true&callback=initMap" async defer></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 </body>
 
