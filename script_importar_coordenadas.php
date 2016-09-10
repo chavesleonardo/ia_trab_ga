@@ -1,7 +1,5 @@
 <?php
 
-#nodo 296244724 aparece em duas "way"s - cruzamento ou esquina ??
-
 #altera o tempo limite para 300 seg
 set_time_limit(300);
 

@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="CGImap 0.4.3 (15845 thorn-02.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+	<node id="319531066" visible="true" version="21" changeset="32296738" timestamp="2015-06-29T23:01:28Z" user="ftrebien" uid="401472" lat="-30.0591251" lon="-51.2169265">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="312819399" visible="true" version="38" changeset="39616396" timestamp="2016-05-28T00:44:53Z" user="smaprs" uid="1852029" lat="-30.0536323" lon="-51.2184895">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="312819701" visible="true" version="37" changeset="39616396" timestamp="2016-05-28T00:44:54Z" user="smaprs" uid="1852029" lat="-30.0542212" lon="-51.2248925">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="296246640" visible="true" version="23" changeset="16461839" timestamp="2013-06-07T20:24:02Z" user="ftrebien" uid="401472" lat="-30.0520926" lon="-51.2299309">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="330035215" visible="true" version="13" changeset="32217176" timestamp="2015-06-26T03:08:32Z" user="ftrebien" uid="401472" lat="-30.0599219" lon="-51.2274070">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="313259550" visible="true" version="30" changeset="32217176" timestamp="2015-06-26T03:08:24Z" user="ftrebien" uid="401472" lat="-30.0565793" lon="-51.2180862">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="319531074" visible="true" version="22" changeset="32296738" timestamp="2015-06-29T23:01:28Z" user="ftrebien" uid="401472" lat="-30.0594443" lon="-51.2165474">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="1437748073" visible="true" version="7" changeset="32237289" timestamp="2015-06-27T07:20:08Z" user="ftrebien" uid="401472" lat="-30.0459279" lon="-51.2189591">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2136702380" visible="true" version="5" changeset="16461839" timestamp="2013-06-07T20:19:05Z" user="ftrebien" uid="401472" lat="-30.0510090" lon="-51.2280680">
+		<tag k="crossing" v="unmarked"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2167049244" visible="true" version="7" changeset="32217176" timestamp="2015-06-26T03:07:17Z" user="ftrebien" uid="401472" lat="-30.0480173" lon="-51.2327804">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2191090802" visible="true" version="6" changeset="36711716" timestamp="2016-01-20T23:37:27Z" user="ftrebien" uid="401472" lat="-30.0484096" lon="-51.2292688">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2191090744" visible="true" version="5" changeset="16461839" timestamp="2013-06-07T20:19:58Z" user="ftrebien" uid="401472" lat="-30.0482233" lon="-51.2285849">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2191090810" visible="true" version="5" changeset="16461839" timestamp="2013-06-07T20:19:59Z" user="ftrebien" uid="401472" lat="-30.0485194" lon="-51.2279118">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="313258210" visible="true" version="37" changeset="39616396" timestamp="2016-05-28T00:44:55Z" user="smaprs" uid="1852029" lat="-30.0524364" lon="-51.2184052">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="313258212" visible="true" version="37" changeset="39616396" timestamp="2016-05-28T00:44:55Z" user="smaprs" uid="1852029" lat="-30.0500724" lon="-51.2182498">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2213097590" visible="true" version="6" changeset="32217176" timestamp="2015-06-26T03:07:21Z" user="ftrebien" uid="401472" lat="-30.0594801" lon="-51.2300180">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2213097594" visible="true" version="6" changeset="32217176" timestamp="2015-06-26T03:07:21Z" user="ftrebien" uid="401472" lat="-30.0595613" lon="-51.2300323">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2136702343" visible="true" version="5" changeset="16461839" timestamp="2013-06-07T20:19:04Z" user="ftrebien" uid="401472" lat="-30.0507654" lon="-51.2280255">
+		<tag k="crossing" v="unmarked"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2210726845" visible="true" version="6" changeset="17019381" timestamp="2013-07-20T04:32:45Z" user="ftrebien" uid="401472" lat="-30.0480904" lon="-51.2319159">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2256253183" visible="true" version="6" changeset="28985728" timestamp="2015-02-20T20:11:39Z" user="ftrebien" uid="401472" lat="-30.0520369" lon="-51.2296669">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2256253191" visible="true" version="5" changeset="16461839" timestamp="2013-06-07T20:20:52Z" user="ftrebien" uid="401472" lat="-30.0521039" lon="-51.2298001">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2256252723" visible="true" version="6" changeset="16461839" timestamp="2013-06-07T20:20:40Z" user="ftrebien" uid="401472" lat="-30.0499595" lon="-51.2297398">
+		<tag k="crossing" v="unmarked"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2256252745" visible="true" version="6" changeset="16461839" timestamp="2013-06-07T20:20:41Z" user="ftrebien" uid="401472" lat="-30.0501650" lon="-51.2297609">
+		<tag k="crossing" v="unmarked"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="313559501" visible="true" version="61" changeset="32217176" timestamp="2015-06-26T03:08:25Z" user="ftrebien" uid="401472" lat="-30.0479476" lon="-51.2184585">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="313559506" visible="true" version="65" changeset="32217176" timestamp="2015-06-26T03:08:25Z" user="ftrebien" uid="401472" lat="-30.0479050" lon="-51.2181028">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="313559522" visible="true" version="88" changeset="32217176" timestamp="2015-06-26T03:08:25Z" user="ftrebien" uid="401472" lat="-30.0483511" lon="-51.2180288">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="313559540" visible="true" version="84" changeset="32217176" timestamp="2015-06-26T03:08:25Z" user="ftrebien" uid="401472" lat="-30.0483922" lon="-51.2183713">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="313559976" visible="true" version="82" changeset="32217176" timestamp="2015-06-26T03:08:25Z" user="ftrebien" uid="401472" lat="-30.0478068" lon="-51.2136382">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="314610444" visible="true" version="15" changeset="32217176" timestamp="2015-06-26T03:08:25Z" user="ftrebien" uid="401472" lat="-30.0586601" lon="-51.2302671">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="313259552" visible="true" version="36" changeset="39616396" timestamp="2016-05-28T00:44:55Z" user="smaprs" uid="1852029" lat="-30.0524596" lon="-51.2182308">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="445842355" visible="true" version="11" changeset="32217176" timestamp="2015-06-26T03:08:38Z" user="ftrebien" uid="401472" lat="-30.0600723" lon="-51.2256762">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="724349775" visible="true" version="10" changeset="32217176" timestamp="2015-06-26T03:08:47Z" user="ftrebien" uid="401472" lat="-30.0594920" lon="-51.2302476">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="313259554" visible="true" version="34" changeset="39616396" timestamp="2016-05-28T00:44:55Z" user="smaprs" uid="1852029" lat="-30.0500913" lon="-51.2180830">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="1172814510" visible="true" version="7" changeset="32237289" timestamp="2015-06-27T07:20:08Z" user="ftrebien" uid="401472" lat="-30.0472736" lon="-51.2182037">
+		<tag k="bicycle" v="yes"/>
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="297619268" visible="true" version="32" changeset="32237289" timestamp="2015-06-27T07:20:08Z" user="ftrebien" uid="401472" lat="-30.0458065" lon="-51.2186804">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="319531073" visible="true" version="24" changeset="32296738" timestamp="2015-06-29T23:01:28Z" user="ftrebien" uid="401472" lat="-30.0597109" lon="-51.2169540">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="319531083" visible="true" version="20" changeset="32296738" timestamp="2015-06-29T23:01:28Z" user="ftrebien" uid="401472" lat="-30.0594291" lon="-51.2172784">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="1172814389" visible="true" version="9" changeset="32217176" timestamp="2015-06-26T03:07:03Z" user="ftrebien" uid="401472" lat="-30.0482635" lon="-51.2180383">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="1172814431" visible="true" version="9" changeset="32217176" timestamp="2015-06-26T03:07:03Z" user="ftrebien" uid="401472" lat="-30.0483119" lon="-51.2183924">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2167049239" visible="true" version="7" changeset="32217176" timestamp="2015-06-26T03:07:17Z" user="ftrebien" uid="401472" lat="-30.0478720" lon="-51.2293066">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2167049242" visible="true" version="7" changeset="32217176" timestamp="2015-06-26T03:07:17Z" user="ftrebien" uid="401472" lat="-30.0479197" lon="-51.2295733">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2167049247" visible="true" version="7" changeset="32217176" timestamp="2015-06-26T03:07:17Z" user="ftrebien" uid="401472" lat="-30.0480144" lon="-51.2277094">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2167049248" visible="true" version="7" changeset="32217176" timestamp="2015-06-26T03:07:17Z" user="ftrebien" uid="401472" lat="-30.0480223" lon="-51.2276093">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2167049252" visible="true" version="7" changeset="32217176" timestamp="2015-06-26T03:07:17Z" user="ftrebien" uid="401472" lat="-30.0484846" lon="-51.2216401">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2167049253" visible="true" version="7" changeset="32217176" timestamp="2015-06-26T03:07:17Z" user="ftrebien" uid="401472" lat="-30.0484925" lon="-51.2215454">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2167299975" visible="true" version="7" changeset="32217176" timestamp="2015-06-26T03:07:18Z" user="ftrebien" uid="401472" lat="-30.0477157" lon="-51.2135621">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2213097595" visible="true" version="7" changeset="32217176" timestamp="2015-06-26T03:07:21Z" user="ftrebien" uid="401472" lat="-30.0596504" lon="-51.2302815">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2213097597" visible="true" version="9" changeset="32217176" timestamp="2015-06-26T03:07:21Z" user="ftrebien" uid="401472" lat="-30.0596576" lon="-51.2309611">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="296247123" visible="true" version="33" changeset="39616396" timestamp="2016-05-28T00:44:52Z" user="smaprs" uid="1852029" lat="-30.0571073" lon="-51.2295943">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="312819398" visible="true" version="38" changeset="39616396" timestamp="2016-05-28T00:44:53Z" user="smaprs" uid="1852029" lat="-30.0536462" lon="-51.2183121">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="1172683902" visible="true" version="7" changeset="32217176" timestamp="2015-06-26T03:07:03Z" user="ftrebien" uid="401472" lat="-30.0578411" lon="-51.2180609">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2285000072" visible="true" version="5" changeset="16462279" timestamp="2013-06-07T20:46:04Z" user="ftrebien" uid="401472" lat="-30.0551346" lon="-51.2147886">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2382917767" visible="true" version="4" changeset="39616396" timestamp="2016-05-28T00:44:51Z" user="smaprs" uid="1852029" lat="-30.0505658" lon="-51.2243834">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128968" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:17Z" user="ftrebien" uid="401472" lat="-30.0508590" lon="-51.2220302">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128964" visible="true" version="2" changeset="35441592" timestamp="2015-11-19T17:42:10Z" user="Alexandre de Menezes" uid="1279154" lat="-30.0508135" lon="-51.2218638">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128932" visible="true" version="2" changeset="35441592" timestamp="2015-11-19T17:42:10Z" user="Alexandre de Menezes" uid="1279154" lat="-30.0486343" lon="-51.2215640">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128981" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:18Z" user="ftrebien" uid="401472" lat="-30.0509949" lon="-51.2219653">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128983" visible="true" version="2" changeset="35441592" timestamp="2015-11-19T17:42:11Z" user="Alexandre de Menezes" uid="1279154" lat="-30.0513450" lon="-51.2280894">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128991" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:18Z" user="ftrebien" uid="401472" lat="-30.0518489" lon="-51.2220848">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128994" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:18Z" user="ftrebien" uid="401472" lat="-30.0519224" lon="-51.2221666">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128996" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:18Z" user="ftrebien" uid="401472" lat="-30.0520085" lon="-51.2221723">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128998" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:18Z" user="ftrebien" uid="401472" lat="-30.0521030" lon="-51.2219848">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378129004" visible="true" version="3" changeset="39616396" timestamp="2016-05-28T00:44:51Z" user="smaprs" uid="1852029" lat="-30.0543514" lon="-51.2223501">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378129006" visible="true" version="2" changeset="39616396" timestamp="2016-05-28T00:44:51Z" user="smaprs" uid="1852029" lat="-30.0544453" lon="-51.2222902">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378129013" visible="true" version="4" changeset="39616396" timestamp="2016-05-28T00:44:51Z" user="smaprs" uid="1852029" lat="-30.0571476" lon="-51.2292733">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378129017" visible="true" version="3" changeset="39616396" timestamp="2016-05-28T00:44:51Z" user="smaprs" uid="1852029" lat="-30.0576988" lon="-51.2229797">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128992" visible="true" version="2" changeset="35441592" timestamp="2015-11-19T17:42:10Z" user="Alexandre de Menezes" uid="1279154" lat="-30.0518525" lon="-51.2220068">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378129007" visible="true" version="2" changeset="35441592" timestamp="2015-11-19T17:42:10Z" user="Alexandre de Menezes" uid="1279154" lat="-30.0545099" lon="-51.2224567">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2382917779" visible="true" version="1" changeset="16932939" timestamp="2013-07-13T04:14:20Z" user="ftrebien" uid="401472" lat="-30.0517834" lon="-51.2244560">
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2381996605" visible="true" version="2" changeset="16932939" timestamp="2013-07-13T04:14:29Z" user="ftrebien" uid="401472" lat="-30.0506032" lon="-51.2244265">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2381996606" visible="true" version="2" changeset="16932939" timestamp="2013-07-13T04:14:29Z" user="ftrebien" uid="401472" lat="-30.0506173" lon="-51.2242857">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2381996607" visible="true" version="2" changeset="16932939" timestamp="2013-07-13T04:14:29Z" user="ftrebien" uid="401472" lat="-30.0506938" lon="-51.2244418">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2381996608" visible="true" version="2" changeset="16932939" timestamp="2013-07-13T04:14:29Z" user="ftrebien" uid="401472" lat="-30.0507088" lon="-51.2242983">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3973884385" visible="true" version="2" changeset="39616396" timestamp="2016-05-28T00:44:56Z" user="smaprs" uid="1852029" lat="-30.0584165" lon="-51.2293844">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="3621004183" visible="true" version="1" changeset="32235210" timestamp="2015-06-27T01:29:18Z" user="ftrebien" uid="401472" lat="-30.0501601" lon="-51.2180866">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="3621004182" visible="true" version="2" changeset="35441592" timestamp="2015-11-19T17:42:09Z" user="Alexandre de Menezes" uid="1279154" lat="-30.0501473" lon="-51.2182559">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="3618664822" visible="true" version="3" changeset="39616396" timestamp="2016-05-28T00:44:56Z" user="smaprs" uid="1852029" lat="-30.0524480" lon="-51.2183180">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3618664789" visible="true" version="2" changeset="32235210" timestamp="2015-06-27T01:29:58Z" user="ftrebien" uid="401472" lat="-30.0501524" lon="-51.2181767">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2892720378" visible="true" version="2" changeset="32217176" timestamp="2015-06-26T03:08:02Z" user="ftrebien" uid="401472" lat="-30.0587941" lon="-51.2308567">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="3618665040" visible="true" version="1" changeset="32217176" timestamp="2015-06-26T02:47:08Z" user="ftrebien" uid="401472" lat="-30.0587937" lon="-51.2178542">
+		<tag k="crossing" v="unmarked"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3618664971" visible="true" version="1" changeset="32217176" timestamp="2015-06-26T02:47:06Z" user="ftrebien" uid="401472" lat="-30.0578272" lon="-51.2179206">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3618664974" visible="true" version="1" changeset="32217176" timestamp="2015-06-26T02:47:07Z" user="ftrebien" uid="401472" lat="-30.0578342" lon="-51.2179907">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3618664976" visible="true" version="1" changeset="32217176" timestamp="2015-06-26T02:47:07Z" user="ftrebien" uid="401472" lat="-30.0578481" lon="-51.2181310">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3618664898" visible="true" version="1" changeset="32217176" timestamp="2015-06-26T02:47:05Z" user="ftrebien" uid="401472" lat="-30.0565887" lon="-51.2182628">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3618664739" visible="true" version="2" changeset="32237289" timestamp="2015-06-27T07:20:08Z" user="ftrebien" uid="401472" lat="-30.0473664" lon="-51.2183288">
+		<tag k="bicycle" v="yes"/>
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3618664700" visible="true" version="1" changeset="32217176" timestamp="2015-06-26T02:46:59Z" user="ftrebien" uid="401472" lat="-30.0444453" lon="-51.2203463">
+		<tag k="crossing" v="unmarked"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2916935599" visible="true" version="2" changeset="35441592" timestamp="2015-11-19T17:42:08Z" user="Alexandre de Menezes" uid="1279154" lat="-30.0484336" lon="-51.2240103">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2916937601" visible="true" version="3" changeset="39616396" timestamp="2016-05-28T00:44:52Z" user="smaprs" uid="1852029" lat="-30.0507372" lon="-51.2244113">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2892721126" visible="true" version="1" changeset="22666704" timestamp="2014-06-01T04:53:11Z" user="ftrebien" uid="401472" lat="-30.0594810" lon="-51.2303549">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3365188170" visible="true" version="1" changeset="29013573" timestamp="2015-02-22T04:44:36Z" user="ftrebien" uid="401472" lat="-30.0515173" lon="-51.2282245">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="3362264261" visible="true" version="1" changeset="28985728" timestamp="2015-02-20T20:11:35Z" user="ftrebien" uid="401472" lat="-30.0496800" lon="-51.2295083">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="3362264260" visible="true" version="1" changeset="28985728" timestamp="2015-02-20T20:11:35Z" user="ftrebien" uid="401472" lat="-30.0496686" lon="-51.2296365">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2916937609" visible="true" version="4" changeset="39616396" timestamp="2016-05-28T00:44:52Z" user="smaprs" uid="1852029" lat="-30.0574588" lon="-51.2253525">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2916937610" visible="true" version="4" changeset="39616396" timestamp="2016-05-28T00:44:52Z" user="smaprs" uid="1852029" lat="-30.0575384" lon="-51.2253633">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="3618664844" visible="true" version="3" changeset="39616396" timestamp="2016-05-28T00:44:56Z" user="smaprs" uid="1852029" lat="-30.0536393" lon="-51.2184008">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3845027812" visible="true" version="2" changeset="39616396" timestamp="2016-05-28T00:44:56Z" user="smaprs" uid="1852029" lat="-30.0578275" lon="-51.2211138">
+		<tag k="crossing" v="zebra"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3845027813" visible="true" version="2" changeset="39616396" timestamp="2016-05-28T00:44:56Z" user="smaprs" uid="1852029" lat="-30.0578869" lon="-51.2214218">
+		<tag k="crossing" v="zebra"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3845027814" visible="true" version="2" changeset="39616396" timestamp="2016-05-28T00:44:56Z" user="smaprs" uid="1852029" lat="-30.0577047" lon="-51.2227165">
+		<tag k="crossing" v="zebra"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3324209096" visible="true" version="1" changeset="28534294" timestamp="2015-01-31T22:14:44Z" user="Papibaquígrafo" uid="1714450" lat="-30.0535673" lon="-51.2191973">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3324209100" visible="true" version="1" changeset="28534294" timestamp="2015-01-31T22:14:44Z" user="Papibaquígrafo" uid="1714450" lat="-30.0592090" lon="-51.2216672">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3324209102" visible="true" version="1" changeset="28534294" timestamp="2015-01-31T22:14:44Z" user="Papibaquígrafo" uid="1714450" lat="-30.0605289" lon="-51.2218973">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="3329365574" visible="true" version="1" changeset="28602229" timestamp="2015-02-04T00:40:26Z" user="ftrebien" uid="401472" lat="-30.0448520" lon="-51.2194652">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="3329365576" visible="true" version="3" changeset="35139095" timestamp="2015-11-06T23:41:03Z" user="smaprs" uid="1852029" lat="-30.0450011" lon="-51.2196856">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2382917761" visible="true" version="5" changeset="39616396" timestamp="2016-05-28T00:44:51Z" user="smaprs" uid="1852029" lat="-30.0493510" lon="-51.2241579">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128982" visible="true" version="4" changeset="35441592" timestamp="2015-11-19T17:42:10Z" user="Alexandre de Menezes" uid="1279154" lat="-30.0510057" lon="-51.2218903">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2382917775" visible="true" version="2" changeset="35441592" timestamp="2015-11-19T17:42:11Z" user="Alexandre de Menezes" uid="1279154" lat="-30.0516800" lon="-51.2245748">
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128973" visible="true" version="3" changeset="32217176" timestamp="2015-06-26T03:07:28Z" user="ftrebien" uid="401472" lat="-30.0509088" lon="-51.2217942">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128976" visible="true" version="3" changeset="32217176" timestamp="2015-06-26T03:07:28Z" user="ftrebien" uid="401472" lat="-30.0509380" lon="-51.2220373">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378129008" visible="true" version="4" changeset="35441592" timestamp="2015-11-19T17:42:09Z" user="Alexandre de Menezes" uid="1279154" lat="-30.0545210" lon="-51.2223739">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2382917801" visible="true" version="5" changeset="39616396" timestamp="2016-05-28T00:44:51Z" user="smaprs" uid="1852029" lat="-30.0575060" lon="-51.2252924">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2316261387" visible="true" version="3" changeset="32217176" timestamp="2015-06-26T03:07:25Z" user="ftrebien" uid="401472" lat="-30.0607186" lon="-51.2190719">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378129003" visible="true" version="4" changeset="39616396" timestamp="2016-05-28T00:44:51Z" user="smaprs" uid="1852029" lat="-30.0543413" lon="-51.2224328">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378129005" visible="true" version="4" changeset="39616396" timestamp="2016-05-28T00:44:51Z" user="smaprs" uid="1852029" lat="-30.0544236" lon="-51.2225275">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378129015" visible="true" version="3" changeset="39616396" timestamp="2016-05-28T00:44:51Z" user="smaprs" uid="1852029" lat="-30.0571258" lon="-51.2294594">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128904" visible="true" version="3" changeset="32217176" timestamp="2015-06-26T03:07:28Z" user="ftrebien" uid="401472" lat="-30.0483119" lon="-51.2239909">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128963" visible="true" version="3" changeset="32217176" timestamp="2015-06-26T03:07:28Z" user="ftrebien" uid="401472" lat="-30.0508058" lon="-51.2219389">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128841" visible="true" version="2" changeset="29963761" timestamp="2015-04-04T00:34:03Z" user="smaprs" uid="1852029" lat="-30.0478305" lon="-51.2239178">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2382917773" visible="true" version="6" changeset="39616396" timestamp="2016-05-28T00:44:51Z" user="smaprs" uid="1852029" lat="-30.0516193" lon="-51.2245548">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2382917781" visible="true" version="4" changeset="22938090" timestamp="2014-06-15T06:00:42Z" user="ftrebien" uid="401472" lat="-30.0518379" lon="-51.2245312">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2382917800" visible="true" version="6" changeset="39616396" timestamp="2016-05-28T00:44:51Z" user="smaprs" uid="1852029" lat="-30.0574928" lon="-51.2254557">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2438095768" visible="true" version="1" changeset="17580788" timestamp="2013-08-29T22:58:04Z" user="ftrebien" uid="401472" lat="-30.0442313" lon="-51.2206660">
+		<tag k="crossing" v="uncontrolled"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2430218143" visible="true" version="4" changeset="32217176" timestamp="2015-06-26T03:07:41Z" user="ftrebien" uid="401472" lat="-30.0474944" lon="-51.2185014">
+		<tag k="crossing" v="unmarked"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2390247162" visible="true" version="1" changeset="17019381" timestamp="2013-07-20T04:32:32Z" user="ftrebien" uid="401472" lat="-30.0480288" lon="-51.2295129">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2390247167" visible="true" version="1" changeset="17019381" timestamp="2013-07-20T04:32:32Z" user="ftrebien" uid="401472" lat="-30.0481007" lon="-51.2317784">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2390247174" visible="true" version="1" changeset="17019381" timestamp="2013-07-20T04:32:32Z" user="ftrebien" uid="401472" lat="-30.0560873" lon="-51.2150464">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128928" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:16Z" user="ftrebien" uid="401472" lat="-30.0485464" lon="-51.2217289">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128929" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:16Z" user="ftrebien" uid="401472" lat="-30.0485655" lon="-51.2214775">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128931" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:16Z" user="ftrebien" uid="401472" lat="-30.0486249" lon="-51.2216569">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128898" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:15Z" user="ftrebien" uid="401472" lat="-30.0482913" lon="-51.2175235">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128910" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:16Z" user="ftrebien" uid="401472" lat="-30.0483647" lon="-51.2240978">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128913" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:16Z" user="ftrebien" uid="401472" lat="-30.0483807" lon="-51.2238948">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128875" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:15Z" user="ftrebien" uid="401472" lat="-30.0480750" lon="-51.2216579">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128877" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:15Z" user="ftrebien" uid="401472" lat="-30.0480847" lon="-51.2275372">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128878" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:15Z" user="ftrebien" uid="401472" lat="-30.0480914" lon="-51.2214172">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128881" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:15Z" user="ftrebien" uid="401472" lat="-30.0481519" lon="-51.2277362">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128882" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:15Z" user="ftrebien" uid="401472" lat="-30.0481611" lon="-51.2276324">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128885" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:15Z" user="ftrebien" uid="401472" lat="-30.0481818" lon="-51.2215066">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128842" visible="true" version="2" changeset="16908649" timestamp="2013-07-11T06:19:06Z" user="ftrebien" uid="401472" lat="-30.0478354" lon="-51.2176086">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128844" visible="true" version="3" changeset="32217176" timestamp="2015-06-26T03:07:28Z" user="ftrebien" uid="401472" lat="-30.0478662" lon="-51.2294250">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128825" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:13Z" user="ftrebien" uid="401472" lat="-30.0476160" lon="-51.2274712">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128830" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:13Z" user="ftrebien" uid="401472" lat="-30.0477071" lon="-51.2275619">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128861" visible="true" version="2" changeset="22938090" timestamp="2014-06-15T06:00:42Z" user="ftrebien" uid="401472" lat="-30.0479749" lon="-51.2239541">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128851" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:14Z" user="ftrebien" uid="401472" lat="-30.0479019" lon="-51.2240257">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128854" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:14Z" user="ftrebien" uid="401472" lat="-30.0479154" lon="-51.2238434">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128869" visible="true" version="2" changeset="23160231" timestamp="2014-06-25T19:50:26Z" user="ftrebien" uid="401472" lat="-30.0480216" lon="-51.2294454">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128859" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:14Z" user="ftrebien" uid="401472" lat="-30.0479609" lon="-51.2292361">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128867" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:14Z" user="ftrebien" uid="401472" lat="-30.0480084" lon="-51.2215785">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128868" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:14Z" user="ftrebien" uid="401472" lat="-30.0480167" lon="-51.2214808">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2378128874" visible="true" version="1" changeset="16875641" timestamp="2013-07-08T16:29:15Z" user="ftrebien" uid="401472" lat="-30.0480634" lon="-51.2278205">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2378128833" visible="true" version="2" changeset="32217176" timestamp="2015-06-26T03:07:28Z" user="ftrebien" uid="401472" lat="-30.0477302" lon="-51.2136545">
+		<tag k="crossing" v="no"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2258297540" visible="true" version="6" changeset="16461839" timestamp="2013-06-07T20:20:58Z" user="ftrebien" uid="401472" lat="-30.0508024" lon="-51.2298410">
+		<tag k="crossing" v="unmarked"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2316306858" visible="true" version="1" changeset="16243772" timestamp="2013-05-22T20:18:44Z" user="ftrebien" uid="401472" lat="-30.0603162" lon="-51.2232691">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2316306859" visible="true" version="1" changeset="16243772" timestamp="2013-05-22T20:18:44Z" user="ftrebien" uid="401472" lat="-30.0603292" lon="-51.2231729">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2316306861" visible="true" version="1" changeset="16243772" timestamp="2013-05-22T20:18:44Z" user="ftrebien" uid="401472" lat="-30.0604214" lon="-51.2231330">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2316306865" visible="true" version="1" changeset="16243772" timestamp="2013-05-22T20:18:44Z" user="ftrebien" uid="401472" lat="-30.0604825" lon="-51.2231413">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="crossing"/>
+	</node>
+	<node id="2382917778" visible="true" version="4" changeset="35441592" timestamp="2015-11-19T17:42:11Z" user="Alexandre de Menezes" uid="1279154" lat="-30.0517705" lon="-51.2245867">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+	<node id="2382917776" visible="true" version="3" changeset="20405846" timestamp="2014-02-06T05:13:52Z" user="ftrebien" uid="401472" lat="-30.0516932" lon="-51.2244449">
+		<tag k="crossing" v="traffic_signals"/>
+		<tag k="highway" v="traffic_signals"/>
+	</node>
+</osm>
