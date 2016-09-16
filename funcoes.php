@@ -1,17 +1,9 @@
 <?php
 
-# O que falta implementar:
-# 1 - Marcar nodos visitados
-# 2 - Comparar nodos com acidentes
-# 3 - Exibir polyline com conjuto de coordenadas finais
-
-#36
-$origem['latitude'] = '-30.054186';
-$origem['longitude'] = '-51.224868';
-#5
-$destino['latitude'] = '-30.048554';
-$destino['longitude'] = '-51.221660';
-
+/*
+* Função criada por terceiros que calcula a distância entre duas coordenadas 
+* levando em consideração a curvatura da terra
+*/
 function getDistance($latitude1, $longitude1, $latitude2, $longitude2) {
 	$earth_radius = 6371;
 
@@ -25,26 +17,26 @@ function getDistance($latitude1, $longitude1, $latitude2, $longitude2) {
 	return $d;
 }
 
-function getChild($latitude, $longitude){
+/*
+*
+* Função que retorna um array de ID de nodos filhos a partir de coordenadas de um determinado nodo.
+* Com a possibilidade de excluir da lista IDs passados previamente com a finalidade de excluir os 
+* nodos já visitados.
+*
+*/
+function getChild($latitude, $longitude, $arrayIdExcluidos = false){
 
 	$arrayChild = array();
-
-	#pega o id do nodo
 	$idNodo = getIdNodo($latitude, $longitude);
 
-	//conecta ao banco
 	$conecta = mysql_connect("localhost", "root", "") or print (mysql_error()); 
-	
-	//abre a base de dados
 	mysql_select_db("ia_trab_ga", $conecta) or print(mysql_error()); 
 	
-	//cria o comando SQL
 	$sql = "SELECT *
 			  FROM nodo_matriz 
 			 WHERE id_nodo_1 = $idNodo
 			    OR id_nodo_2 = $idNodo";
 	
-	//executa o comando SQL
 	$result = mysql_query($sql, $conecta);
 
 	if (!$result) {
@@ -53,7 +45,7 @@ function getChild($latitude, $longitude){
 	}
 
 	if (mysql_num_rows($result) == 0) {
-	    echo "Não foram encontradas linhas, nada para mostrar, assim eu estou saindo";
+	    echo "Nenhum registro encontrado em getChild($latitude, $longitude, $arrayIdExcluidos = false) - ($sql)";
 	    exit;
 	}
 
@@ -70,94 +62,82 @@ function getChild($latitude, $longitude){
 
 }
 
+/*
+* Função que retorna o ID de um nodo através das suas coordenadas
+*/
 function getIdNodo($latitude, $longitude){
 
-	//conecta ao banco
 	$conecta = mysql_connect("localhost", "root", "") or print (mysql_error()); 
-	
-	//abre a base de dados
 	mysql_select_db("ia_trab_ga", $conecta) or print(mysql_error()); 
-	
-	//cria o comando SQL
+
 	$sql = " SELECT id
 			   FROM nodo
 			  WHERE latitude LIKE '$latitude'
 			    AND longitude LIKE '$longitude'";
 
     $result = mysql_query($sql, $conecta);
-	
-	//executa o comando SQL
+
 	if (!$result) {
 	    echo "Não foi possível executar a consulta ($sql) no banco de dados: " . mysql_error();
 	    exit;
 	}
 
 	if (mysql_num_rows($result) == 0) {
-	    echo "Não foram encontradas linhas, nada para mostrar, assim eu estou saindo";
+	    echo "Nenhum registro encontrado em getIdNodo($latitude, $longitude) - ($sql)";
 	    exit;
+	}else{
+		$row = mysql_fetch_assoc($result);
+		return $row["id"];	
 	}
-
-	if ($row = mysql_fetch_assoc($result)) {
-	    return $row["id"];
-	}	    
+	    
 }
 
+/*
+* Função que retorna as coordenadas de um nodo pelo seu ID
+*/
 function getCoordenadas($idNodo){
 
-	//conecta ao banco
-	$conecta = mysql_connect("localhost", "root", "") or print (mysql_error()); 
+	$arrayRetorno = array();
 	
-	//abre a base de dados
+	$conecta = mysql_connect("localhost", "root", "") or print (mysql_error()); 
 	mysql_select_db("ia_trab_ga", $conecta) or print(mysql_error()); 
 	
-	//cria o comando SQL
 	$sql = " SELECT *
 			   FROM nodo
 			  WHERE id = $idNodo";
 
     $result = mysql_query($sql, $conecta);
 	
-	//executa o comando SQL
 	if (!$result) {
 	    echo "Não foi possível executar a consulta ($sql) no banco de dados: " . mysql_error();
 	    exit;
 	}
 
 	if (mysql_num_rows($result) == 0) {
-	    echo "Não foram encontradas linhas, nada para mostrar, assim eu estou saindo";
+	    echo "Nenhum registro encontrado em getCoordenadas($idNodo) - ($sql)";
 	    exit;
-	}
-
-	$arrayRetorno = array();
-	if ($row = mysql_fetch_assoc($result)) {
+	}else{
+		$row = mysql_fetch_assoc($result);
 		$arrayRetorno['latitude'] = $row["latitude"];
 		$arrayRetorno['longitude'] = $row["longitude"];
 	}
 	
-	if (count($arrayRetorno) > 0) {
-		return $arrayRetorno;
-	}else{
-		return false;
-	}
+	return (count($arrayRetorno) > 0) ? $arrayRetorno : false;
+
 }
 
-
-
-
-
-
+/*
+* Função percorre os filhos de um nodo em busca da melhor escolha.
+*/
 function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $destinoLongitude, $idNodoDestino){
 
-	$arrayRetornoPai = getChild($origemLatitude, $origemLongitude, $destinoLatitude, $destinoLongitude);
-
-	echo "<pre>";
-	print_r($arrayRetornoPai);
-	echo "</pre>";
-
 	$menorDistancia = 0;
+	$arrayRetornoPai = getChild($origemLatitude, $origemLongitude, $destinoLatitude, $destinoLongitude);
+	$idNodoPai = getIdNodo($origemLatitude, $origemLongitude);
 
 	if (is_array($arrayRetornoPai)) {
 
+		echo "<br/><b>Nodo Pai:</b> $idNodoPai";
 		foreach ($arrayRetornoPai as $idNodoFilho) {
 			$coordenadasFilho = getCoordenadas($idNodoFilho);
 
@@ -171,13 +151,12 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 					$menorNodo = $idNodoFilho;
 				}
 
-				echo "<b>ID: $idNodoFilho</b> - $distancia<br/>";
+				echo "<br/><b>Filho:</b> $idNodoFilho - Distancia: $distancia";
 			}
 
 		}
 
-		echo "<br><b>MENOR DISTANCIA: $menorDistancia</b>";
-		echo "<br><b>MENOR NODO: $menorNodo</b>";
+		echo "<br><b>MENOR NODO: $menorNodo - MENOR DISTANCIA: $menorDistancia</b><br/>";
 
 		$coordenadasMenorFilho = getCoordenadas($menorNodo);
 
@@ -191,8 +170,19 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 
 }
 
-#Pega id nodo destino
-$idNodoDestino = getIdNodo($destino['latitude'],$destino['longitude']);
+/*
+* Função que imprime um array entre tags <pre> para melhor visualização do conteúdo
+*/
+function echoArray($array){
+	echo "<pre>";
+	print_r($array);
+	echo "</pre>";
+}
 
-#primeira chamada
-getMenorFilho($origem['latitude'],$origem['longitude'], $destino['latitude'],$destino['longitude'], $idNodoDestino);
+/* RECUPERAR COLISÕES NA REGIAO
+SELECT *
+  FROM acidentes 
+ WHERE (latitude > -30.0611 AND latitude < -30.0477)
+   AND (longitude > -51.2305 AND longitude < -51.2212)
+-- AND tipo_localidade = 'cruzamento';
+*/
