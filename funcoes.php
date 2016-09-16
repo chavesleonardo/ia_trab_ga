@@ -235,3 +235,15 @@ function getAcidentesPorRegiaoComFiltros($minLat, $maxLat, $minLon, $maxLon, $ti
 	return (count($arrayRetorno > 0)) ? $arrayRetorno : false;
 
 }
+
+function getAcidentesAoRedor($lat, $lon){
+	$sql = "SELECT
+				    ((ACOS(SIN($lat * PI() / 180) * SIN(latitude * PI() / 180) + COS($lon * PI() / 180) * COS(latitude * PI() / 180) * COS((- 51.224189 - longitude) * PI() / 180)) * 100 / PI()) * 60 * 1.1515) AS distancia,
+					id,
+				    latitude, 
+				    longitude
+			  FROM
+				    acidentes
+	        HAVING distancia <= 0.05
+	      ORDER BY distancia ASC"
+}
