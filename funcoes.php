@@ -144,9 +144,15 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 			if ($idNodoDestino == $menorNodo) {
 				$fim = true;
 			}else{
+
 				$distancia = getDistance($coordenadasFilho['latitude'], $coordenadasFilho['longitude'], $destinoLatitude, $destinoLongitude);
-				
+
+				//buscar os acidentes próximos ao filho em um raio de 50 metros
+
+				//comparar quantidades de acidentes é maior que de outros filhos
+
 				if ($distancia < $menorDistancia || $menorDistancia == 0) {
+
 					$menorDistancia = $distancia;
 					$menorNodo = $idNodoFilho;
 				}
@@ -156,14 +162,14 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 
 		}
 
-		echo "<br><b>MENOR NODO: $menorNodo - MENOR DISTANCIA: $menorDistancia</b><br/>";
+		echo "<br><b>MENOR NODO: $menorNodo - $menorDistancia</b><br/>";
 
 		$coordenadasMenorFilho = getCoordenadas($menorNodo);
 
 		if (!$fim) {
 			getMenorFilho($coordenadasMenorFilho['latitude'],$coordenadasMenorFilho['longitude'], $destinoLatitude, $destinoLongitude, $idNodoDestino);		
 		}else{
-			exit('<br/>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br/><b>!!!!!!!!!! ENCONTROU !!!!!!!!!!</b>');
+			echo '<br/>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br/><b>!!!!!!!!!! ENCONTROU !!!!!!!!!!</b>';
 		}
 
 	}
@@ -173,16 +179,59 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 /*
 * Função que imprime um array entre tags <pre> para melhor visualização do conteúdo
 */
-function echoArray($array){
+function echoArray($array, $exit = false){
 	echo "<pre>";
 	print_r($array);
 	echo "</pre>";
+	if ($exit) {
+		exit;
+	}
 }
 
-/* RECUPERAR COLISÕES NA REGIAO
-SELECT *
-  FROM acidentes 
- WHERE (latitude > -30.0611 AND latitude < -30.0477)
-   AND (longitude > -51.2305 AND longitude < -51.2212)
--- AND tipo_localidade = 'cruzamento';
+/*
+* Função que coleta todos os acidentes de uma região e conta quantidade em coordenadas iguais
+* retornando um array com as coordenadas e quantidades
 */
+function getAcidentesPorRegiaoComFiltros($minLat, $maxLat, $minLon, $maxLon, $tipoLocalidade = false){
+
+	$arrayRetorno = array();
+
+	$conecta = mysql_connect("localhost", "root", "") or print (mysql_error()); 
+	mysql_select_db("ia_trab_ga", $conecta) or print(mysql_error()); 
+
+	$sql = "SELECT *
+	  		  FROM acidentes 
+	 		 WHERE (latitude > $minLat AND latitude < $maxLat)
+	   		   AND (longitude > $minLon AND longitude < $maxLon) ";
+	if ($tipoLocalidade) {
+		$sql .= "AND tipo_localidade = '$tipoLocalidade' ";
+	}
+
+	$result = mysql_query($sql, $conecta);
+
+	if (!$result) {
+	    echo "Não foi possível executar a consulta ($sql) no banco de dados: " . mysql_error();
+	    exit;
+	}
+
+	if (mysql_num_rows($result) == 0) {
+	    echo "Nenhum registro encontrado em getAcidentesPorRegiaoComFiltros($minLat, $maxLat, $minLon, $maxLon, $tipoLocalidade = false) - ($sql)";
+	    exit;
+	}
+
+	while ($row = mysql_fetch_assoc($result)) {
+	
+		if (array_key_exists($row["latitude"].",".$row["longitude"], $arrayRetorno)) {
+			$arrayRetorno[$row["latitude"].",".$row["longitude"]]['total'] += 1;
+		}
+
+		$arrayRetorno[$row["latitude"].",".$row["longitude"]]['latitude'] = $row["latitude"];
+		$arrayRetorno[$row["latitude"].",".$row["longitude"]]['longitude'] = $row["longitude"];
+	
+	}
+
+	echoArray($arrayRetorno);
+
+	return (count($arrayRetorno > 0)) ? $arrayRetorno : false;
+
+}

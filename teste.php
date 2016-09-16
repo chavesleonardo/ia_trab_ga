@@ -20,3 +20,7 @@ $idNodoDestino = getIdNodo($destino['latitude'],$destino['longitude']);
 
 #primeira chamada
 getMenorFilho($origem['latitude'],$origem['longitude'], $destino['latitude'],$destino['longitude'], $idNodoDestino);
+
+getAcidentesPorRegiaoComFiltros(-30.0611, -30.0477, -51.2305, -51.2212, 'cruzamento');
+
+//getAcidentesPorRegiaoComFiltros(-30.0611, -30.0477, -51.2305, -51.2212, 'cruzamento');
