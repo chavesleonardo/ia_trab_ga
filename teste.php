@@ -18,9 +18,13 @@ $destino['longitude'] = '-51.221660';
 #Pega id nodo destino
 $idNodoDestino = getIdNodo($destino['latitude'],$destino['longitude']);
 
-#primeira chamada
-getMenorFilho($origem['latitude'],$origem['longitude'], $destino['latitude'],$destino['longitude'], $idNodoDestino);
+$arrayNodosVisitados = array();
 
-getAcidentesPorRegiaoComFiltros(-30.0611, -30.0477, -51.2305, -51.2212, 'cruzamento');
+#primeira chamada
+getMenorFilho($origem['latitude'],$origem['longitude'], $destino['latitude'],$destino['longitude'], $idNodoDestino, $arrayNodosVisitados);
 
 //getAcidentesPorRegiaoComFiltros(-30.0611, -30.0477, -51.2305, -51.2212, 'cruzamento');
+
+//getAcidentesPorRegiaoComFiltros(-30.0611, -30.0477, -51.2305, -51.2212, 'cruzamento');
+
+//echo getQuantidadeAcidentesPorRaio(-30.049462, -51.224195, 0.05);

@@ -24,40 +24,31 @@ function getDistance($latitude1, $longitude1, $latitude2, $longitude2) {
 * nodos já visitados.
 *
 */
-function getChild($latitude, $longitude, $arrayIdExcluidos = false){
+function getChild($latitude, $longitude, $idNodoPai, $arrayNodosVisitados){
 
-	$arrayChild = array();
-	$idNodo = getIdNodo($latitude, $longitude);
-
-	$conecta = mysql_connect("localhost", "root", "") or print (mysql_error()); 
-	mysql_select_db("ia_trab_ga", $conecta) or print(mysql_error()); 
-	
 	$sql = "SELECT *
 			  FROM nodo_matriz 
-			 WHERE id_nodo_1 = $idNodo
-			    OR id_nodo_2 = $idNodo";
-	
-	$result = mysql_query($sql, $conecta);
+			 WHERE id_nodo_1 = $idNodoPai
+			    OR id_nodo_2 = $idNodoPai";
 
-	if (!$result) {
-	    echo "Não foi possível executar a consulta ($sql) no banco de dados: " . mysql_error();
-	    exit;
-	}
-
-	if (mysql_num_rows($result) == 0) {
-	    echo "Nenhum registro encontrado em getChild($latitude, $longitude, $arrayIdExcluidos = false) - ($sql)";
-	    exit;
-	}
+	$result = mysql_query($sql, conectaBD());
+	trataResultBD($result);
 
 	while ($row = mysql_fetch_assoc($result)) {
-		if ($row["id_nodo_1"] != $idNodo) {
+		if ($row["id_nodo_1"] != $idNodoPai) {
 	    	$arrayChild[] = $row["id_nodo_1"];
 		}
-		if ($row["id_nodo_2"] != $idNodo) {
+		if ($row["id_nodo_2"] != $idNodoPai) {
 	    	$arrayChild[] = $row["id_nodo_2"];
 		}
+		if(in_array($row["id_nodo_1"], $arrayNodosVisitados)){
+			echo "<br> Esta no array: ".$row["id_nodo_1"];
+		}
+		if(in_array($row["id_nodo_2"], $arrayNodosVisitados)){
+			echo "<br> Esta no array: ".$row["id_nodo_2"];
+		}
 	}
-
+	echoARray($arrayChild);
 	return (count($arrayChild > 0)) ? $arrayChild : false;
 
 }
@@ -67,28 +58,16 @@ function getChild($latitude, $longitude, $arrayIdExcluidos = false){
 */
 function getIdNodo($latitude, $longitude){
 
-	$conecta = mysql_connect("localhost", "root", "") or print (mysql_error()); 
-	mysql_select_db("ia_trab_ga", $conecta) or print(mysql_error()); 
-
 	$sql = " SELECT id
 			   FROM nodo
 			  WHERE latitude LIKE '$latitude'
 			    AND longitude LIKE '$longitude'";
 
-    $result = mysql_query($sql, $conecta);
+    $result = mysql_query($sql, conectaBD());
+	trataResultBD($result);
 
-	if (!$result) {
-	    echo "Não foi possível executar a consulta ($sql) no banco de dados: " . mysql_error();
-	    exit;
-	}
-
-	if (mysql_num_rows($result) == 0) {
-	    echo "Nenhum registro encontrado em getIdNodo($latitude, $longitude) - ($sql)";
-	    exit;
-	}else{
-		$row = mysql_fetch_assoc($result);
-		return $row["id"];	
-	}
+	$row = mysql_fetch_assoc($result);
+	return $row["id"];	
 	    
 }
 
@@ -99,28 +78,16 @@ function getCoordenadas($idNodo){
 
 	$arrayRetorno = array();
 	
-	$conecta = mysql_connect("localhost", "root", "") or print (mysql_error()); 
-	mysql_select_db("ia_trab_ga", $conecta) or print(mysql_error()); 
-	
 	$sql = " SELECT *
 			   FROM nodo
 			  WHERE id = $idNodo";
 
-    $result = mysql_query($sql, $conecta);
-	
-	if (!$result) {
-	    echo "Não foi possível executar a consulta ($sql) no banco de dados: " . mysql_error();
-	    exit;
-	}
+    $result = mysql_query($sql, conectaBD());
+	trataResultBD($result);
 
-	if (mysql_num_rows($result) == 0) {
-	    echo "Nenhum registro encontrado em getCoordenadas($idNodo) - ($sql)";
-	    exit;
-	}else{
-		$row = mysql_fetch_assoc($result);
-		$arrayRetorno['latitude'] = $row["latitude"];
-		$arrayRetorno['longitude'] = $row["longitude"];
-	}
+	$row = mysql_fetch_assoc($result);
+	$arrayRetorno['latitude'] = $row["latitude"];
+	$arrayRetorno['longitude'] = $row["longitude"];
 	
 	return (count($arrayRetorno) > 0) ? $arrayRetorno : false;
 
@@ -129,11 +96,12 @@ function getCoordenadas($idNodo){
 /*
 * Função percorre os filhos de um nodo em busca da melhor escolha.
 */
-function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $destinoLongitude, $idNodoDestino){
+function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $destinoLongitude, $idNodoDestino, $arrayNodosVisitados){
 
 	$menorDistancia = 0;
-	$arrayRetornoPai = getChild($origemLatitude, $origemLongitude, $destinoLatitude, $destinoLongitude);
 	$idNodoPai = getIdNodo($origemLatitude, $origemLongitude);
+	$arrayNodosVisitados[$idNodoPai] = $idNodoPai;
+	$arrayRetornoPai = getChild($origemLatitude, $origemLongitude, $idNodoPai, $arrayNodosVisitados);
 
 	if (is_array($arrayRetornoPai)) {
 
@@ -146,7 +114,7 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 			}else{
 
 				$distancia = getDistance($coordenadasFilho['latitude'], $coordenadasFilho['longitude'], $destinoLatitude, $destinoLongitude);
-
+				$acidentes = getQuantidadeAcidentesPorRaio($coordenadasFilho['latitude'], $coordenadasFilho['longitude'], 0.05);
 				//buscar os acidentes próximos ao filho em um raio de 50 metros
 
 				//comparar quantidades de acidentes é maior que de outros filhos
@@ -157,7 +125,7 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 					$menorNodo = $idNodoFilho;
 				}
 
-				echo "<br/><b>Filho:</b> $idNodoFilho - Distancia: $distancia";
+				echo "<br/><b>Filho:</b> $idNodoFilho - Distancia: $distancia - Acidentes: $acidentes";
 			}
 
 		}
@@ -165,9 +133,10 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 		echo "<br><b>MENOR NODO: $menorNodo - $menorDistancia</b><br/>";
 
 		$coordenadasMenorFilho = getCoordenadas($menorNodo);
+		$arrayNodosVisitados[$menorNodo] = $menorNodo;
 
 		if (!$fim) {
-			getMenorFilho($coordenadasMenorFilho['latitude'],$coordenadasMenorFilho['longitude'], $destinoLatitude, $destinoLongitude, $idNodoDestino);		
+			getMenorFilho($coordenadasMenorFilho['latitude'],$coordenadasMenorFilho['longitude'], $destinoLatitude, $destinoLongitude, $idNodoDestino, $arrayNodosVisitados);
 		}else{
 			echo '<br/>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br/><b>!!!!!!!!!! ENCONTROU !!!!!!!!!!</b>';
 		}
@@ -196,9 +165,6 @@ function getAcidentesPorRegiaoComFiltros($minLat, $maxLat, $minLon, $maxLon, $ti
 
 	$arrayRetorno = array();
 
-	$conecta = mysql_connect("localhost", "root", "") or print (mysql_error()); 
-	mysql_select_db("ia_trab_ga", $conecta) or print(mysql_error()); 
-
 	$sql = "SELECT *
 	  		  FROM acidentes 
 	 		 WHERE (latitude > $minLat AND latitude < $maxLat)
@@ -207,17 +173,8 @@ function getAcidentesPorRegiaoComFiltros($minLat, $maxLat, $minLon, $maxLon, $ti
 		$sql .= "AND tipo_localidade = '$tipoLocalidade' ";
 	}
 
-	$result = mysql_query($sql, $conecta);
-
-	if (!$result) {
-	    echo "Não foi possível executar a consulta ($sql) no banco de dados: " . mysql_error();
-	    exit;
-	}
-
-	if (mysql_num_rows($result) == 0) {
-	    echo "Nenhum registro encontrado em getAcidentesPorRegiaoComFiltros($minLat, $maxLat, $minLon, $maxLon, $tipoLocalidade = false) - ($sql)";
-	    exit;
-	}
+	$result = mysql_query($sql, conectaBD());
+	trataResultBD($result);
 
 	while ($row = mysql_fetch_assoc($result)) {
 	
@@ -236,14 +193,45 @@ function getAcidentesPorRegiaoComFiltros($minLat, $maxLat, $minLon, $maxLon, $ti
 
 }
 
-function getAcidentesAoRedor($lat, $lon){
-	$sql = "SELECT
-				    ((ACOS(SIN($lat * PI() / 180) * SIN(latitude * PI() / 180) + COS($lon * PI() / 180) * COS(latitude * PI() / 180) * COS((- 51.224189 - longitude) * PI() / 180)) * 100 / PI()) * 60 * 1.1515) AS distancia,
-					id,
-				    latitude, 
-				    longitude
-			  FROM
-				    acidentes
-	        HAVING distancia <= 0.05
-	      ORDER BY distancia ASC"
+/*
+* Pega o total de acidentes em radio de uma determinada coordenada
+*/
+function getQuantidadeAcidentesPorRaio($lat, $lon, $raio){
+
+	$sql = "   SELECT ((ACOS(SIN($lat * PI() / 180) * SIN(latitude * PI() / 180) + 
+			            COS($lat * PI() / 180) * COS(latitude * PI() / 180) * COS(($lon - longitude) * 
+			            PI() / 180)) * 180 / PI()) * 99 * 1.1515) AS distance 
+			    FROM acidentes 
+			  HAVING distance <= $raio
+			ORDER BY distance ASC";
+
+	$result = mysql_query($sql, conectaBD());
+	trataResultBD($result);
+
+	$counter = 0;
+	while ($row = mysql_fetch_assoc($result)) {
+		$counter++;
+	}
+
+	return $counter;
+
+}
+
+/*
+* Conecta neste banco de dados
+*/
+function conectaBD(){
+	$conecta = mysql_connect("localhost", "root", "") or print (mysql_error()); 
+	mysql_select_db("ia_trab_ga", $conecta) or print(mysql_error());
+	return $conecta;
+}
+
+/*
+* trata o retorno do banco
+*/
+function trataResultBD($result){
+	if (!$result) {
+	    echo "Não foi possível executar a consulta ($sql) no banco de dados: " . mysql_error();
+	    exit;
+	}
 }
