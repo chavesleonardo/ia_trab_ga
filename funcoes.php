@@ -41,14 +41,16 @@ function getChild($latitude, $longitude, $idNodoPai, $arrayNodosVisitados){
 		if ($row["id_nodo_2"] != $idNodoPai) {
 	    	$arrayChild[] = $row["id_nodo_2"];
 		}
-		if(in_array($row["id_nodo_1"], $arrayNodosVisitados)){
-			echo "<br> Esta no array: ".$row["id_nodo_1"];
-		}
-		if(in_array($row["id_nodo_2"], $arrayNodosVisitados)){
-			echo "<br> Esta no array: ".$row["id_nodo_2"];
+	}
+	
+	if (count($arrayChild > 0)) {
+		foreach ($arrayChild as $key => $value) {
+			if (in_array($value, $arrayNodosVisitados)) {
+				unset($arrayChild[$key]);
+			}
 		}
 	}
-	echoARray($arrayChild);
+
 	return (count($arrayChild > 0)) ? $arrayChild : false;
 
 }
@@ -113,10 +115,10 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 				$fim = true;
 			}else{
 
+				//buscar os acidentes próximos ao filho em um raio de 50 metros
 				$distancia = getDistance($coordenadasFilho['latitude'], $coordenadasFilho['longitude'], $destinoLatitude, $destinoLongitude);
 				$acidentes = getQuantidadeAcidentesPorRaio($coordenadasFilho['latitude'], $coordenadasFilho['longitude'], 0.05);
-				//buscar os acidentes próximos ao filho em um raio de 50 metros
-
+				
 				//comparar quantidades de acidentes é maior que de outros filhos
 
 				if ($distancia < $menorDistancia || $menorDistancia == 0) {
@@ -126,6 +128,9 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 				}
 
 				echo "<br/><b>Filho:</b> $idNodoFilho - Distancia: $distancia - Acidentes: $acidentes";
+
+				$fim = ($idNodoFilho == $idNodoDestino) ? true : $fim;
+
 			}
 
 		}
