@@ -8,8 +8,13 @@ require_once('funcoes.php');
 # 3 - Exibir polyline com conjuto de coordenadas finais
 
 #36
-$origem['latitude'] = '-30.054186';
-$origem['longitude'] = '-51.224868';
+//$origem['latitude'] = '-30.054186';
+//$origem['longitude'] = '-51.224868';
+
+#48
+$origem['latitude'] = '-30.057240';
+$origem['longitude'] = '-51.228528';
+
 #5
 $destino['latitude'] = '-30.048554';
 $destino['longitude'] = '-51.221660';

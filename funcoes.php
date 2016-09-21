@@ -101,6 +101,7 @@ function getCoordenadas($idNodo){
 function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $destinoLongitude, $idNodoDestino, $arrayNodosVisitados){
 
 	$menorDistancia = 0;
+	$jaPegouSegundoMenor = false;
 	$idNodoPai = getIdNodo($origemLatitude, $origemLongitude);
 	$arrayNodosVisitados[$idNodoPai] = $idNodoPai;
 	$arrayRetornoPai = getChild($origemLatitude, $origemLongitude, $idNodoPai, $arrayNodosVisitados);
@@ -125,6 +126,10 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 
 					$menorDistancia = $distancia;
 					$menorNodo = $idNodoFilho;
+				}
+
+				if (!$jaPegouSegundoMenor) {
+					# code...
 				}
 
 				echo "<br/><b>Filho:</b> $idNodoFilho - Distancia: $distancia - Acidentes: $acidentes";
