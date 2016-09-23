@@ -101,56 +101,47 @@ function getCoordenadas($idNodo){
 function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $destinoLongitude, $idNodoDestino, $arrayNodosVisitados){
 
 	$menorDistancia = 0;
+	$menorAcidente = 2147483648;
 	$jaPegouSegundoMenor = false;
 	$idNodoPai = getIdNodo($origemLatitude, $origemLongitude);
 	$arrayNodosVisitados[$idNodoPai] = $idNodoPai;
 	$arrayRetornoPai = getChild($origemLatitude, $origemLongitude, $idNodoPai, $arrayNodosVisitados);
 
+	array_push($_SESSION['listaCoordenadas'], getCoordenadas($idNodoPai));
+
 	if (is_array($arrayRetornoPai)) {
 
+		$listaNodosFilhos = '';
+		$separadorListaNodosFilhos = '';
+
 		echo "<br/><b>Nodo Pai:</b> $idNodoPai";
+
 		foreach ($arrayRetornoPai as $idNodoFilho) {
+
 			$coordenadasFilho = getCoordenadas($idNodoFilho);
+			$listaNodosFilhos .= $separadorListaNodosFilhos.$idNodoFilho;
+			$separadorListaNodosFilhos = ',';
 
-			if ($idNodoDestino == $menorNodo) {
-				$fim = true;
-			}else{
-
-				//buscar os acidentes próximos ao filho em um raio de 50 metros
-				$distancia = getDistance($coordenadasFilho['latitude'], $coordenadasFilho['longitude'], $destinoLatitude, $destinoLongitude);
-				$acidentes = getQuantidadeAcidentesPorRaio($coordenadasFilho['latitude'], $coordenadasFilho['longitude'], 0.05);
-				
-				//comparar quantidades de acidentes é maior que de outros filhos
-
-				if ($distancia < $menorDistancia || $menorDistancia == 0) {
-
-					$menorDistancia = $distancia;
-					$menorNodo = $idNodoFilho;
-				}
-
-				if (!$jaPegouSegundoMenor) {
-					# code...
-				}
-
-				echo "<br/><b>Filho:</b> $idNodoFilho - Distancia: $distancia - Acidentes: $acidentes";
-
-				$fim = ($idNodoFilho == $idNodoDestino) ? true : $fim;
-
-			}
+			//buscar os acidentes próximos ao filho em um raio de 50 metros
+			$distancia = getDistance($coordenadasFilho['latitude'], $coordenadasFilho['longitude'], $destinoLatitude, $destinoLongitude);
+			$acidentes = getQuantidadeAcidentesPorRaio($coordenadasFilho['latitude'], $coordenadasFilho['longitude'], 0.05);
+			echo "<br/><b>Nodo Filho:</b> $idNodoFilho - Acidentes: ".$acidentes." - Distância: ".$distancia;
+			
+			//inserir na tabela idNodoFilho, distancia, acidentes
+			inserirTemp($idNodoFilho, $distancia, $acidentes);
 
 		}
 
-		echo "<br><b>MENOR NODO: $menorNodo - $menorDistancia</b><br/>";
+		$arrayMelhorOpcao = getMelhorNodoFilho($listaNodosFilhos);
+		$coordenadasMenorFilho = getCoordenadas($arrayMelhorOpcao['id_nodo_origem']);
+		$arrayNodosVisitados[$arrayMelhorOpcao['id_nodo_origem']] = $arrayMelhorOpcao['id_nodo_origem'];
 
-		$coordenadasMenorFilho = getCoordenadas($menorNodo);
-		$arrayNodosVisitados[$menorNodo] = $menorNodo;
-
-		if (!$fim) {
+		if ($arrayMelhorOpcao['id_nodo_origem'] != $idNodoDestino) {
 			getMenorFilho($coordenadasMenorFilho['latitude'],$coordenadasMenorFilho['longitude'], $destinoLatitude, $destinoLongitude, $idNodoDestino, $arrayNodosVisitados);
 		}else{
-			echo '<br/>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br/><b>!!!!!!!!!! ENCONTROU !!!!!!!!!!</b>';
+			array_push($_SESSION['listaCoordenadas'], getCoordenadas($idNodoDestino));
 		}
-
+		
 	}
 
 }
@@ -244,4 +235,38 @@ function trataResultBD($result){
 	    echo "Não foi possível executar a consulta ($sql) no banco de dados: " . mysql_error();
 	    exit;
 	}
+}
+
+function inserirTemp($idNodoFilho, $distancia, $acidentes){
+	$sql = "INSERT INTO temp (id_nodo_origem, distancia, acidentes)
+			   	 VALUES ($idNodoFilho, $distancia, $acidentes)";
+
+	$result = mysql_query($sql, conectaBD());
+}
+
+function apagaTabelaTemp(){
+	$sql = "DELETE FROM temp";
+
+	mysql_query($sql, conectaBD());	
+}
+
+function getMelhorNodoFilho($listaNodosFilhos){
+
+	$sql = "SELECT * 
+	          FROM temp
+			 WHERE id_nodo_origem IN ($listaNodosFilhos)
+		  ORDER BY acidentes ASC, distancia ASC
+		  	 LIMIT 1";
+
+	$result = mysql_query($sql, conectaBD());
+	trataResultBD($result);
+
+	while ($row = mysql_fetch_assoc($result)) {
+		foreach ($row as $campo => $valor) {
+			$arrayRetorno[$campo] = $valor;
+		}
+	}
+
+	return (count($arrayRetorno > 0)) ? $arrayRetorno : false;
+
 }
