@@ -20,6 +20,7 @@ session_start();
         }
         #map1 {
             height: 40%;
+            margin-bottom: 10px;
         }
         #map2{
             height: 40%;
@@ -92,25 +93,51 @@ session_start();
         }
 
         function initMap2() {
+
+            var infowindow = new google.maps.InfoWindow();
+
             var map2 = new google.maps.Map(document.getElementById('map2'), {
                 zoom: 15,
                 center: {lat: -30.0545372, lng: -51.2226081}
             });
+
+            marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(-30.0545372, -51.2226081),
+                        map: map2
+                    });
+
+            marker2 = new google.maps.Marker({
+                        position: new google.maps.LatLng(-30.054186, -51.224868),
+                        map: map2
+                    });
+
+            google.maps.event.addListener(marker, 'click', (function(marker) {
+                return function() {
+                    infowindow.setContent('<b>Origem:</b> a');
+                    infowindow.open(map2, marker);
+                }
+            })(marker));
+
+            google.maps.event.addListener(marker2, 'click', (function(marker) {
+                return function() {
+                    infowindow.setContent('<b>Destino:</b> a');
+                    infowindow.open(map2, marker2);
+                }
+            })(marker));
 
             var flightPlanCoordinates = [
             <?php
                 if( isset($_SESSION['dados_mapa_2']) ){
                     echo $_SESSION['dados_mapa_2'];
                 }
-            ?>
-            
+            ?>            
             ];
             var flightPath = new google.maps.Polyline({
                 path: flightPlanCoordinates,
                 geodesic: true,
                 strokeColor: '#0000FF',
-                strokeOpacity: 1.0,
-                strokeWeight: 4
+                strokeOpacity: 0.5,
+                strokeWeight: 5
             });
                 flightPath.setMap(map2);
             }
