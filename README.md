@@ -18,5 +18,3 @@ http://wiki.openstreetmap.org/wiki/OSM_XML
 
 Wiki das tags contidas em cada XML:
 http://wiki.openstreetmap.org/wiki/Elements
-
-https://developers.google.com/maps/documentation/javascript/examples/polyline-simple?hl=pt-br

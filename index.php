@@ -1,3 +1,10 @@
+<?php
+
+ob_start();
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +18,11 @@
             margin: 0;
             padding: 0;
         }
-        #map {
+        #map1 {
+            height: 40%;
+            margin-bottom: 10px;
+        }
+        #map2{
             height: 40%;
         }
 
@@ -41,20 +52,21 @@
 		</form>
 	</div>
     
-    <div id="map"></div>
+    <div id="map1"></div>
+    <div id="map2"></div>
 
     <script>
 
-        function initMap() {
+        function initMap1() {
 
             var directionsService = new google.maps.DirectionsService;
             var directionsDisplay = new google.maps.DirectionsRenderer;
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
+            var map1 = new google.maps.Map(document.getElementById('map1'), {
+                zoom: 14,
                 center: {lat: -30.035039, lng: -51.220972}
             });
 
-            directionsDisplay.setMap(map);
+            directionsDisplay.setMap(map1);
 
         <?php
             if ( isset($_POST['destino']) && isset($_POST['origem']) ) {
@@ -80,12 +92,67 @@
         });
         }
 
+        function initMap2() {
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var map2 = new google.maps.Map(document.getElementById('map2'), {
+                zoom: 15,
+                center: {lat: -30.0545372, lng: -51.2226081}
+            });
+
+            marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(-30.0545372, -51.2226081),
+                        map: map2
+                    });
+
+            marker2 = new google.maps.Marker({
+                        position: new google.maps.LatLng(-30.054186, -51.224868),
+                        map: map2
+                    });
+
+            google.maps.event.addListener(marker, 'click', (function(marker) {
+                return function() {
+                    infowindow.setContent('<b>Origem:</b> a');
+                    infowindow.open(map2, marker);
+                }
+            })(marker));
+
+            google.maps.event.addListener(marker2, 'click', (function(marker) {
+                return function() {
+                    infowindow.setContent('<b>Destino:</b> a');
+                    infowindow.open(map2, marker2);
+                }
+            })(marker));
+
+            var flightPlanCoordinates = [
+            <?php
+                if( isset($_SESSION['dados_mapa_2']) ){
+                    echo $_SESSION['dados_mapa_2'];
+                }
+            ?>            
+            ];
+            var flightPath = new google.maps.Polyline({
+                path: flightPlanCoordinates,
+                geodesic: true,
+                strokeColor: '#0000FF',
+                strokeOpacity: 0.5,
+                strokeWeight: 5
+            });
+                flightPath.setMap(map2);
+            }
+
+            function xablau(){
+                initMap1();
+                initMap2();
+            }
+
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl8qjiJLd7KBxiKB0-2lRej5o96NYigIA&signed_in=true&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl8qjiJLd7KBxiKB0-2lRej5o96NYigIA&signed_in=true&callback=xablau" async defer></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 
-<script src="bootstrap/js/bootstrap.min.js"></script>
 
 </html>
