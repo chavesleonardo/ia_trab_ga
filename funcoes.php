@@ -1,7 +1,6 @@
 <?php
 
-$listaNodosVisitados = '';
-$separadorListaNodosVisitados = '';
+
 
 /*
 * Função criada por terceiros que calcula a distância entre duas coordenadas 
@@ -117,6 +116,8 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 
 		$listaNodosFilhos = '';
 		$separadorListaNodosFilhos = '';
+		$listaNodosVisitados = '';
+		$separadorListaNodosVisitados = '';
 		
 		echo "<br/><b>Nodo Pai:</b> $idNodoPai";
 
@@ -137,7 +138,7 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 			
 			$coordenadasMenorFilho = getCoordenadas($idNodoFilho);
 			$arrayNodosVisitados[$idNodoPai] = $idNodoPai;
-			$listaNodosVisitados .= $separadorListaNodosVisitados.$arrayNodosVisitados[$idNodoPai];
+			$listaNodosVisitados .= $separadorListaNodosVisitados.$idNodoPai;	
 			$separadorListaNodosVisitados = ',';
 			
 			echoArray($arrayNodosVisitados,false);
@@ -146,9 +147,12 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 				getMenorFilho($coordenadasMenorFilho['latitude'],$coordenadasMenorFilho['longitude'], $destinoLatitude, $destinoLongitude, $idNodoDestino, $arrayNodosVisitados);
 			}else{
 				//array_push($_SESSION['listaCoordenadas'], getCoordenadas($idNodoDestino));
+				
 				echo "<br/><h1>SUCESSSSSSSSSSSSSSSSSOOO!</h1>";
-				echoArray($listaNodosVisitados,false);
-				Calcula($menorAcidente = getTotalAcidentes($listaNodosVisitados));
+				tete($arrayNodosVisitados);
+				
+				//echo "</br>($listaNodosVisitados)";
+				//Calcula($menorAcidente = getTotalAcidentes($listaNodosVisitados));
 			}
 		}
 
@@ -320,7 +324,7 @@ function getTotalAcidentes($arrayNodosVisitados){
 	return $row["total_acidentes"];
 
 }
-
+/*
 function Calcula($menorAcidente){
 	$menor = 100000;
 	//echo "<br/> $menorAcidente";
@@ -330,4 +334,19 @@ function Calcula($menorAcidente){
 //		echo "<br/> $menor";
 	}
 
+}
+*/
+function tete($arrayNodosVisitados){
+	
+	$lista = '';
+	$separador = '';
+	
+	foreach ($arrayNodosVisitados as $tete){
+		$te=$tete;
+//		echo "</br> te: $te";
+		$lista .= $separador.$te;
+		$separador = ',';
+		//getAcidentes($te);
+	}
+	echo "</br> Ta aqui: $lista";
 }
