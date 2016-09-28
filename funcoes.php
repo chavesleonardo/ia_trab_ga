@@ -1,5 +1,8 @@
 <?php
 
+$listaNodosVisitados = '';
+$separadorListaNodosVisitados = '';
+
 /*
 * Função criada por terceiros que calcula a distância entre duas coordenadas 
 * levando em consideração a curvatura da terra
@@ -98,14 +101,15 @@ function getCoordenadas($idNodo){
 /*
 * Função percorre os filhos de um nodo em busca da melhor escolha.
 */
+
 function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $destinoLongitude, $idNodoDestino, $arrayNodosVisitados){
 
 	$menorDistancia = 0;
-	$menorAcidente = 2147483648;
+	//$menorAcidente = 2147483648;
 	$jaPegouSegundoMenor = false;
 	$idNodoPai = getIdNodo($origemLatitude, $origemLongitude);
-	$arrayNodosVisitados[$idNodoPai] = $idNodoPai;
-	$arrayRetornoPai = getChild($origemLatitude, $origemLongitude, $idNodoPai, $arrayNodosVisitados);
+	//$arrayNodosVisitados[$idNodoPai] = $idNodoPai;
+	$arrayRetornoPai = getChild($origemLatitude, $origemLongitude, $idNodoPai, $arrayNodosVisitados);	
 
 	array_push($_SESSION['listaCoordenadas'], getCoordenadas($idNodoPai));
 
@@ -113,7 +117,7 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 
 		$listaNodosFilhos = '';
 		$separadorListaNodosFilhos = '';
-
+		
 		echo "<br/><b>Nodo Pai:</b> $idNodoPai";
 
 		foreach ($arrayRetornoPai as $idNodoFilho) {
@@ -129,19 +133,36 @@ function getMenorFilho($origemLatitude, $origemLongitude, $destinoLatitude, $des
 			
 			//inserir na tabela idNodoFilho, distancia, acidentes
 			inserirTemp($idNodoFilho, $distancia, $acidentes);
-
+			inserirTemp2($idNodoFilho, $idNodoPai, $distancia, $acidentes);
+			
+			$coordenadasMenorFilho = getCoordenadas($idNodoFilho);
+			$arrayNodosVisitados[$idNodoPai] = $idNodoPai;
+			$listaNodosVisitados .= $separadorListaNodosVisitados.$arrayNodosVisitados[$idNodoPai];
+			$separadorListaNodosVisitados = ',';
+			
+			echoArray($arrayNodosVisitados,false);
+			
+			if ($idNodoFilho != $idNodoDestino) {
+				getMenorFilho($coordenadasMenorFilho['latitude'],$coordenadasMenorFilho['longitude'], $destinoLatitude, $destinoLongitude, $idNodoDestino, $arrayNodosVisitados);
+			}else{
+				//array_push($_SESSION['listaCoordenadas'], getCoordenadas($idNodoDestino));
+				echo "<br/><h1>SUCESSSSSSSSSSSSSSSSSOOO!</h1>";
+				echoArray($listaNodosVisitados,false);
+				Calcula($menorAcidente = getTotalAcidentes($listaNodosVisitados));
+			}
 		}
 
-		$arrayMelhorOpcao = getMelhorNodoFilho($listaNodosFilhos);
-		$coordenadasMenorFilho = getCoordenadas($arrayMelhorOpcao['id_nodo_origem']);
-		$arrayNodosVisitados[$arrayMelhorOpcao['id_nodo_origem']] = $arrayMelhorOpcao['id_nodo_origem'];
+//		$arrayMelhorOpcao = getMelhorNodoFilho($listaNodosFilhos);
+		//$coordenadasMenorFilho = getCoordenadas($idNodoFilho);
+		//$arrayNodosVisitados[$idNodoPai] = $idNodoPai;
 
-		if ($arrayMelhorOpcao['id_nodo_origem'] != $idNodoDestino) {
+/*
+		if ($idNodoFilho != $idNodoDestino) {
 			getMenorFilho($coordenadasMenorFilho['latitude'],$coordenadasMenorFilho['longitude'], $destinoLatitude, $destinoLongitude, $idNodoDestino, $arrayNodosVisitados);
 		}else{
 			array_push($_SESSION['listaCoordenadas'], getCoordenadas($idNodoDestino));
 		}
-		
+*/	
 	}
 
 }
@@ -244,11 +265,26 @@ function inserirTemp($idNodoFilho, $distancia, $acidentes){
 	$result = mysql_query($sql, conectaBD());
 }
 
+function inserirTemp2($idNodoFilho, $idNodoPai, $distancia, $acidentes){
+	$sql = "INSERT INTO temp2 (id_nodo_filho, id_nodo_pai, distancia, acidentes)
+			   	 VALUES ($idNodoFilho, $idNodoPai, $distancia, $acidentes)";
+
+	$result = mysql_query($sql, conectaBD());
+}
+
+
 function apagaTabelaTemp(){
 	$sql = "DELETE FROM temp";
 
 	mysql_query($sql, conectaBD());	
 }
+
+function apagaTabelaTemp2(){
+	$sql = "DELETE FROM temp2";
+
+	mysql_query($sql, conectaBD());	
+}
+
 
 function getMelhorNodoFilho($listaNodosFilhos){
 
@@ -268,5 +304,30 @@ function getMelhorNodoFilho($listaNodosFilhos){
 	}
 
 	return (count($arrayRetorno > 0)) ? $arrayRetorno : false;
+
+}
+
+function getTotalAcidentes($arrayNodosVisitados){
+
+	$sql = "SELECT SUM(acidentes) AS total_acidentes
+	          FROM temp2
+			 WHERE id_nodo_pai IN ($arrayNodosVisitados)";
+
+	$result = mysql_query($sql, conectaBD());
+	trataResultBD($result);
+
+	$row = mysql_fetch_assoc($result);
+	return $row["total_acidentes"];
+
+}
+
+function Calcula($menorAcidente){
+	$menor = 100000;
+	//echo "<br/> $menorAcidente";
+	
+	if ($menorAcidente < $menor) {
+		$menor = $menorAcidente;
+//		echo "<br/> $menor";
+	}
 
 }

@@ -4,7 +4,7 @@ ob_start();
 session_start();
 require_once('funcoes.php');
 
-apagaTabelaTemp();
+apagaTabelaTemp2();
 
 #36
 $origem['latitude'] = '-30.054186';
