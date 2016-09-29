@@ -270,3 +270,10 @@ function getMelhorNodoFilho($listaNodosFilhos){
 	return (count($arrayRetorno > 0)) ? $arrayRetorno : false;
 
 }
+
+function inserirQuantidadeAcidentesPorId($idNodo, $qtdeAcidentes){
+
+	$sql = "UPDATE nodo SET acidentes = $qtdeAcidentes WHERE id = $idNodo";
+
+	mysql_query($sql, conectaBD());
+}

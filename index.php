@@ -3,6 +3,31 @@
 ob_start();
 session_start();
 
+require_once('funcoes.php');
+
+//require_once('teste.php');
+
+function listarNodos(){
+
+    $conecta = mysql_connect("localhost", "root", "") or print (mysql_error()); 
+    mysql_select_db("ia_trab_ga", $conecta) or print(mysql_error());
+
+    $sql = "SELECT * FROM nodo ";
+
+    $result = mysql_query($sql, $conecta);
+    if (!$result) { return false; }
+
+    while ($row = mysql_fetch_assoc($result)) {
+        foreach ($row as $campo => $valor) {
+            $arrayRetorno[$row['id']][$campo] = $valor;
+        }
+    }
+
+    return (count($arrayRetorno > 0)) ? $arrayRetorno : false;
+}
+
+$arrSelectNodos = listarNodos();
+
 ?>
 
 <!DOCTYPE html>
@@ -35,19 +60,30 @@ session_start();
 				<div clas="row">
 					<p>
 						Origem:
-						<input type="text" name="origem" value="<?php echo $_POST['origem']; ?>">
-					</p>
-					
-				</div>
-				<div clas="row">
-					<p>
+                        <select name="origem" required="">
+                            <option value="">Selectione</option>
+                            <?php 
+                                if ($arrSelectNodos) {
+                                    foreach ($arrSelectNodos as $idNodo => $dadosNodo) {
+                                        echo '<option value="'.$dadosNodo['latitude'].','.$dadosNodo['longitude'].'">'.$idNodo.'</option>';
+                                    }
+                                }
+                            ?>
+                        </select>
 						Destino: 
-						<input type="text" name="destino" value="<?php echo $_POST['destino']; ?>">
-					</p>
-				</div>
-				<div class="row">
+                        <select name="destino" required="">
+                            <option value="">Selectione</option>
+                            <?php 
+                                if ($arrSelectNodos) {
+                                    foreach ($arrSelectNodos as $idNodo => $dadosNodo) {
+                                        echo '<option value="'.$dadosNodo['latitude'].','.$dadosNodo['longitude'].'">'.$idNodo.'</option>';
+                                    }
+                                }
+                            ?>
+                        </select>
 					<button class="btn btn-warning" type="submit">Calcular</button>
-				</div>
+                    </p>
+                </div>
 			</div>
 		</form>
 	</div>
@@ -98,34 +134,34 @@ session_start();
 
             var map2 = new google.maps.Map(document.getElementById('map2'), {
                 zoom: 15,
-                center: {lat: -30.0545372, lng: -51.2226081}
+                center: {lat: -30.0517717, lng: -51.2236135}
             });
 
             marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(-30.0545372, -51.2226081),
+                        position: new google.maps.LatLng(<?php if(isset($_POST['origem'])) { echo $_POST['origem'];} ?>),
                         map: map2
                     });
 
             marker2 = new google.maps.Marker({
-                        position: new google.maps.LatLng(-30.054186, -51.224868),
+                        position: new google.maps.LatLng(<?php if(isset($_POST['destino'])) { echo $_POST['destino'];} ?>),
                         map: map2
                     });
 
             google.maps.event.addListener(marker, 'click', (function(marker) {
                 return function() {
-                    infowindow.setContent('<b>Origem:</b> a');
+                    infowindow.setContent('<b>Origem:</b> '+'<?php echo $_POST['origem']; ?>');
                     infowindow.open(map2, marker);
                 }
             })(marker));
 
             google.maps.event.addListener(marker2, 'click', (function(marker) {
                 return function() {
-                    infowindow.setContent('<b>Destino:</b> a');
+                    infowindow.setContent('<b>Destino:</b> '+'<?php echo $_POST['destino']; ?>');
                     infowindow.open(map2, marker2);
                 }
             })(marker));
 
-            var flightPlanCoordinates = [
+            var linha = [
             <?php
                 if( isset($_SESSION['dados_mapa_2']) ){
                     echo $_SESSION['dados_mapa_2'];
@@ -133,7 +169,7 @@ session_start();
             ?>            
             ];
             var flightPath = new google.maps.Polyline({
-                path: flightPlanCoordinates,
+                path: linha,
                 geodesic: true,
                 strokeColor: '#0000FF',
                 strokeOpacity: 0.5,

@@ -13,28 +13,27 @@ function a_star($idNodoInicial, $idNodoFinal){
 
 	$chegouAoFim = false;
 
-	$listaNodosDisponiveis = array();
-	$listaNodosVisualizados = array();
+	$listaOpen = array();
+	$listaClosed = array();
 	$listaCaminhoPercorrido = array();
 
-	# adiciona o ponto de partida na lista $listaNodosVisualizados
-	array_push($listaNodosDisponiveis, $idNodoInicial);
+	# adiciona o ponto de partida na lista $listaClosed
+	array_push($listaOpen, $idNodoInicial);
 
-	
 	array_push($listaCaminhoPercorrido, $idNodoInicial);
 
 	$idMelhorNodo = $idNodoInicial;
 
 	while (!$chegouAoFim) {
 
-		# busca o nodo com menos custo em $listaNodosDisponiveis
-	 	$idMelhorNodo = buscarNodoComMelhorCusto($listaNodosDisponiveis, $idNodoFinal);
+		# busca o nodo com menos custo em $listaOpen
+	 	$idMelhorNodo = buscarNodoComMelhorCusto($listaOpen, $idNodoFinal);
 
-	 	# remove o $idMelhorNodo de $listaNodosDisponiveis
-	 	unset($listaNodosDisponiveis[$idMelhorNodo]);
+	 	# remove o $idMelhorNodo de $listaOpen
+	 	unset($listaOpen[$idMelhorNodo]);
 
-	 	# adiciona $idMelhorNodo a $listaNodosVisualizados
-	 	array_push($listaNodosVisualizados, $idMelhorNodo);
+	 	# adiciona $idMelhorNodo a $listaClosed
+	 	array_push($listaClosed, $idMelhorNodo);
 
 	 	# verifica se o melhor nodo é o destino
 	 	if ($idMelhorNodo == $idNodoFinal) {
@@ -46,9 +45,6 @@ function a_star($idNodoInicial, $idNodoFinal){
 	 	#lista os filhos de $idMelhorNodo
 	 	$listaFilhosMelhorNodo = listarFilhosPorIdNodo($idMelhorNodo, $listaCaminhoPercorrido);
 	 	$idMelhorEscolhaDosFilhos = buscarNodoComMelhorCusto($listaFilhosMelhorNodo, $idNodoFinal);
-	 	// echo "<br>filhos do melhor nodo: $idMelhorNodo";
-	 	// echo "<br>Melhor escolha: $idMelhorEscolhaDosFilhos";
-	 	// echoArray($listaFilhosMelhorNodo);
 	 	
 	 	//if ($listaFilhosMelhorNodo) {
 
@@ -56,31 +52,30 @@ function a_star($idNodoInicial, $idNodoFinal){
 
 		 		$temFilhos = listarFilhosPorIdNodo($idFilhoMelhorNodo, $listaCaminhoPercorrido);
 		 
-		 		# *SE* $idFilhoMelhorNodo está em $listaNodosVisualizados
+		 		# *SE* $idFilhoMelhorNodo está em $listaClosed
 		 		# ou $idFilhoMelhorNodo nao possui filhos *ENTAO* pula para o próximo filho
-		 		if (!$temFilhos || in_array($idFilhoMelhorNodo, $listaNodosVisualizados)) {
+		 		if (!$temFilhos || in_array($idFilhoMelhorNodo, $listaClosed)) {
 		 			# pula pro proximo...
 
 		 		}else{
 
 		 			# *SE* $idFilhoMelhorNodo tem o menor custo *E* idFilhoMelhorNodo
-		 			# não está em $listaNodosDisponiveis
+		 			# não está em $listaOpen
 		 			if ( $idFilhoMelhorNodo == $idMelhorEscolhaDosFilhos) {
 
 		 				# set f_cost of neighbour ????
 		 				# ????????????????????????????
 
 		 				#  set parent of neighbour to current
-		 				$idkey = array_search($idMelhorNodo, $listaNodosDisponiveis);
-		 				unset($listaNodosDisponiveis[$idkey]);
+		 				$idkey = array_search($idMelhorNodo, $listaOpen);
+		 				unset($listaOpen[$idkey]);
 
 		 				$idMelhorNodo = $idFilhoMelhorNodo;
-		 				// echo "<br>Melhor Nodo virou: ".$idMelhorNodo;
 						
-		 				# *SE* $idFilhoMelhorNodo não está em $listaNodosDisponiveis 
-		 				# *ENTAO* adiciona em $listaNodosDisponiveis
-		 				if ( !in_array($idFilhoMelhorNodo, $listaNodosDisponiveis) ) {
-		                	array_push($listaNodosDisponiveis, $idFilhoMelhorNodo);
+		 				# *SE* $idFilhoMelhorNodo não está em $listaOpen 
+		 				# *ENTAO* adiciona em $listaOpen
+		 				if ( !in_array($idFilhoMelhorNodo, $listaOpen) ) {
+		                	array_push($listaOpen, $idFilhoMelhorNodo);
 		 				}
 
 		                # salva o melhor nodo na lista de caminhos percorridos
@@ -89,22 +84,15 @@ function a_star($idNodoInicial, $idNodoFinal){
 		 			} //end last if
 		 			
 		 		}
-		 		/*
-		 		echo "<br>Disponiveis:";
-		 		echoArray($listaNodosDisponiveis);
-		 		echo "Visualizados:";
-		 		echoArray($listaNodosVisualizados);
-		 		echo "Pecorrido:";
-		 		echoArray($listaCaminhoPercorrido);
-				*/
+
 		 	} //end foreach
 
 	 	//}//if pre foreach
 
 	}//end while
 
-	$arrayRetorno['listaNodosDisponiveis'] = $listaNodosDisponiveis;
-	$arrayRetorno['listaNodosVisualizados'] = $listaNodosVisualizados;
+	$arrayRetorno['listaOpen'] = $listaOpen;
+	$arrayRetorno['listaClosed'] = $listaClosed;
 	$arrayRetorno['listaCaminhoPercorrido'] = $listaCaminhoPercorrido;
 
 	return $arrayRetorno;
@@ -142,7 +130,6 @@ function buscarNodoComMelhorCusto($listaNodosDisponiveis, $idNodoDestino){
 		# calcula distancia reta ao nodo destino
 		$arrayCoordenadasNodoDisponivel = getCoordenadasPorIdNodo($idNodoDisponivel);
 		$arrayCoordenadasNodoDestino = getCoordenadasPorIdNodo($idNodoDestino);
-
 
 		$distancia = getDistance($arrayCoordenadasNodoDisponivel['latitude'], 
 											   					 $arrayCoordenadasNodoDisponivel['longitude'], 
