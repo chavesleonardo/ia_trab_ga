@@ -36,7 +36,6 @@ $arrSelectNodos = listarNodos();
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>AIzaSyCl8qjiJLd7KBxiKB0-2lRej5o96NYigIA</title>
-	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <style>
         html, body {
             height: 100%;
@@ -186,9 +185,6 @@ $arrSelectNodos = listarNodos();
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl8qjiJLd7KBxiKB0-2lRej5o96NYigIA&signed_in=true&callback=xablau" async defer></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
 
 </body>
-
-
 </html>

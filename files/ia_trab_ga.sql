@@ -102,6 +102,31 @@ LOCK TABLES `nodo_matriz` WRITE;
 INSERT INTO `nodo_matriz` VALUES (1,2),(1,6),(2,3),(3,4),(4,5),(6,7),(8,7),(8,9),(8,13),(9,3),(9,10),(20,11),(10,5),(11,10),(11,12),(13,12),(13,14),(13,17),(15,14),(15,16),(17,16),(17,18),(19,18),(19,12),(19,20),(19,23),(21,20),(21,22),(23,22),(23,24),(25,18),(25,26),(26,16),(26,27),(26,31),(28,27),(28,29),(29,30),(29,32),(30,27),(30,31),(33,32),(33,34),(33,41),(34,31),(35,34),(35,24),(35,36),(37,36),(37,22),(37,38),(39,38),(40,39),(40,36),(40,41),(42,41),(42,32),(42,47),(43,41),(43,44),(43,45),(46,44),(46,45),(46,52),(47,48),(47,62),(48,49),(49,45),(49,50),(51,50),(51,52),(51,59),(53,52),(53,54),(55,54),(55,56),(57,54),(57,58),(58,52),(58,59),(58,66),(60,50),(60,59),(61,60),(61,48),(61,62),(63,62),(63,64),(64,60),(64,65),(65,59),(65,66),(67,66),(67,57),(67,68),(68,56),(36,23),(9,12),(44,40);
 /*!40000 ALTER TABLE `nodo_matriz` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `temp`
+--
+
+DROP TABLE IF EXISTS `temp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `temp` (
+  `id_nodo_origem` int(11) NOT NULL,
+  `id_nodo_destino` int(11) DEFAULT NULL,
+  `distancia` varchar(45) DEFAULT NULL,
+  `acidentes` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_nodo_origem`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `temp`
+--
+
+LOCK TABLES `temp` WRITE;
+/*!40000 ALTER TABLE `temp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `temp` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -112,4 +137,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-02 21:09:28
+-- Dump completed on 2016-10-03 10:46:42
