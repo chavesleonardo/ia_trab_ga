@@ -5,8 +5,6 @@ session_start();
 
 require_once('funcoes.php');
 
-//require_once('teste.php');
-
 function listarNodos(){
 
     $conecta = mysql_connect("localhost", "root", "") or print (mysql_error()); 
@@ -57,30 +55,31 @@ $arrSelectNodos = listarNodos();
 		<form action="" method="post" accept-charset="utf-8">
 			<div class="col-lg-12">
 				<div clas="row">
-					<p>
-						Origem:
-                        <select name="origem" required="">
-                            <option value="">Selectione</option>
+					<p style="text-align: center;">
+                        <select name="origem" required="" style="height: 35px; border-radius: 5px; outline: none; width: 150px;">
+                            <option value="">Selecione a Origem</option>
                             <?php 
                                 if ($arrSelectNodos) {
                                     foreach ($arrSelectNodos as $idNodo => $dadosNodo) {
-                                        echo '<option value="'.$dadosNodo['latitude'].','.$dadosNodo['longitude'].'">'.$idNodo.'</option>';
+                                        echo '<option value="'.$dadosNodo['latitude'].','.$dadosNodo['longitude'].'"> Origem: '.$idNodo.'</option>';
                                     }
                                 }
                             ?>
                         </select>
-						Destino: 
-                        <select name="destino" required="">
-                            <option value="">Selectione</option>
+                        <select name="destino" required="" style="height: 35px; border-radius: 5px; outline: none;  width: 150px;">
+                            <option value="">Selecione o Destino</option>
                             <?php 
                                 if ($arrSelectNodos) {
                                     foreach ($arrSelectNodos as $idNodo => $dadosNodo) {
-                                        echo '<option value="'.$dadosNodo['latitude'].','.$dadosNodo['longitude'].'">'.$idNodo.'</option>';
+                                        echo '<option value="'.$dadosNodo['latitude'].','.$dadosNodo['longitude'].'">Destino: '.$idNodo.'</option>';
                                     }
                                 }
                             ?>
                         </select>
-					<button class="btn btn-warning" type="submit">Calcular</button>
+
+					   <button class="btn btn-warning" type="submit" name="curta" style="height: 35px; border-radius: 5px; outline: none; background-color: #749BFF; width: 150px;">Rota Mais Curta</button>
+                       <button class="btn btn-warning" type="submit" name="acidente" style="height: 35px; border-radius: 5px; outline: none; background-color: #77BF3B; width: 150px;">Rota Sem Acidentes</button>
+
                     </p>
                 </div>
 			</div>
