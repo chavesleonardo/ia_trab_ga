@@ -3,7 +3,7 @@
 function a_star($idNodoInicial, $idNodoFinal){
 
 	$chegouAoFim = false;
-
+	$aviso = '';
 	$listaOpen = array();
 	$listaClosed = array();
 	$listaCaminhoPercorrido = array();
@@ -25,7 +25,8 @@ function a_star($idNodoInicial, $idNodoFinal){
 			# se a lista está OPEN está vazia, não há mais o que percorrer. Encerra tudo.
 	 		if ( empty($listaOpen) ) {
 		 		$chegouAoFim = true;
-		 		echo "<br>Lista OPEN vazia";
+		 		$alerta[0] = 'erro';
+		 		$alerta[1] = 'Lista OPEN vazia! Não há rota possível';
 		 		break;
 	 		}
 			
@@ -44,7 +45,8 @@ function a_star($idNodoInicial, $idNodoFinal){
 	 	if ($idMelhorNodo == $idNodoFinal) {
 	 		$listaCaminhoPercorrido = adicionarLista($listaCaminhoPercorrido, $idMelhorNodo);
 	 		$chegouAoFim = true;
-	 		echo "<br>Chegou ao destino";
+	 		$alerta[0] = 'sucesso';
+	 		$alerta[1] = 'Chegou ao destino';
 	 		break;
 	 	}
 
@@ -83,7 +85,11 @@ function a_star($idNodoInicial, $idNodoFinal){
 		 		# *SE* $idFilhoMelhorNodo está em $listaClosed
 		 		# ou $idFilhoMelhorNodo nao possui filhos *ENTAO* pula para o próximo filho
 		 		if (!$temFilhos || in_array($idFilhoMelhorNodo, $listaClosed)) {
-		 			# pula pro proximo...
+		 			
+		 			# salva como closed 
+		 			if (!in_array($idFilhoMelhorNodo, $listaClosed)) {
+		 				$listaClosed = adicionarLista($listaClosed, $idFilhoMelhorNodo);
+		 			}
 
 		 		}else{
 
@@ -112,39 +118,44 @@ function a_star($idNodoInicial, $idNodoFinal){
 
 		 	} //end foreach
 
-
 	 	}//if pre foreach
 
 	}//end while
 
-	$arrayRetorno['listaOpen'] = $listaOpen;
-	$arrayRetorno['listaClosed'] = $listaClosed;
-	$arrayRetorno['listaCaminhoPercorrido'] = $listaCaminhoPercorrido;
+	if ($alerta[0] == 'sucesso') {
 
-	return $arrayRetorno;
+		$arrayRetorno['listaOpen'] = $listaOpen;
+		$arrayRetorno['listaClosed'] = $listaClosed;
+		$arrayRetorno['listaCaminhoPercorrido'] = $listaCaminhoPercorrido;
+
+		$arrayCaminho = reconstruct_path($listaCaminhoPercorrido);
+
+		if (!empty($arrayCaminho)) {
+			foreach ($arrayCaminho as $nodoCoord) {
+
+				$dadosNodo = getCoordenadasPorIdNodo($nodoCoord);
+				$ultimo .= "{lat: ".$dadosNodo['latitude'].", lng: ".$dadosNodo['longitude']."}, ";
+			}
+
+			if ($ultimo) {
+				$_SESSION['dados_mapa_2'] = $ultimo;
+				$coordenadasOrigem = getCoordenadasPorIdNodo($idNodoInicial);
+				$coordenadasDestino = getCoordenadasPorIdNodo($idNodoFinal);
+				$_POST['coordenadasOrigem'] = $coordenadasOrigem['latitude'].','.$coordenadasOrigem['longitude'];
+				$_POST['coordenadasDestino'] = $coordenadasDestino['latitude'].','.$coordenadasDestino['longitude'];
+			}
+		}
+	}else{
+		$arrayRetornoErro['listaOpen'] = $listaOpen;
+		$arrayRetornoErro['listaClosed'] = $listaClosed;
+		$arrayRetornoErro['listaCaminhoPercorrido'] = $listaCaminhoPercorrido;		
+	}
+
+	$_SESSION['alerta'] = $alerta;
+
+	return ($arrayRetornoErro) ? $arrayRetornoErro : false ;
 
 }//end function a_star
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function shortest_way($idNodoOrigem, $idNodoDestino){
 
@@ -192,48 +203,6 @@ function shortest_way($idNodoOrigem, $idNodoDestino){
 	$_SESSION['dados_mapa_2'] = $ultimo;
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function adicionarLista($lista, $item){
 	if (!in_array($item, $lista)) {
@@ -370,6 +339,45 @@ function buscarNodoComMelhorCusto($listaNodosDisponiveis, $idNodoDestino){
 
 	return $idNodoRetorno;
 
+}
+
+function reconstruct_path($listaIds){
+
+	$listaIds = array_reverse($listaIds);
+
+	$arrRetorno = array();
+
+	foreach ($listaIds as $idNodo) {
+		
+		if (empty($arrRetorno)) {
+			$arrRetorno[] = $idNodo;
+		}else{
+			if ( temLigacao($idNodo, end($arrRetorno)) ) {
+				
+				#verifica se tem filhos que estao na lista
+
+				$arrRetorno[] = $idNodo;
+			}else{
+				#nao tem ligação, não salva na lista
+			}
+		}
+	}
+
+	return (!empty($arrRetorno)) ? $arrRetorno : false ;
+}
+
+function temLigacao($idNodo1, $idNodo2){
+
+	$sql = "SELECT 1 as possui_conexao FROM nodo_matriz WHERE 
+			( id_nodo_1 = $idNodo1 OR id_nodo_2 = $idNodo1 )
+		    AND
+		    ( id_nodo_1 = $idNodo2 OR id_nodo_2 = $idNodo2 )";
+
+	$result = mysql_query($sql, conectaBD());
+	if (!$result) { return false; }
+	$row = mysql_fetch_assoc($result);
+
+	return $row["possui_conexao"];	
 }
 
 /*

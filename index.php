@@ -15,13 +15,14 @@ if (!empty($_POST)) {
     $idNodoFinal = $_POST['destino'];
 
     if (isset($_POST['acidente'])) {
-        $retorno = a_star($idNodoInicial, $idNodoFinal);
-        echoArray($retorno, true);
+        $retornoAstar = a_star($idNodoInicial, $idNodoFinal);
     }
 
     if (isset($_POST['curta'])) {
         $retorno = shortest_way($idNodoInicial, $idNodoFinal);
     }
+
+
 
 }
 
@@ -55,7 +56,11 @@ if (!empty($_POST)) {
                         <?php 
                             if ($arrSelectNodos) {
                                 foreach ($arrSelectNodos as $idNodo => $dadosNodo) {
-                                    echo '<option value="'.$idNodo.'">'.$idNodo.'</option>';
+                                    echo '<option '; 
+                                    if (isset($_POST['origem']) && $idNodo == $_POST['origem']) {
+                                        echo 'selected ';
+                                    }
+                                    echo 'value="'.$idNodo.'">'.$idNodo.'</option>';
                                 }
                             }
                         ?>
@@ -65,13 +70,17 @@ if (!empty($_POST)) {
                         <?php 
                             if ($arrSelectNodos) {
                                 foreach ($arrSelectNodos as $idNodo => $dadosNodo) {
-                                    echo '<option value="'.$idNodo.'">'.$idNodo.'</option>';
+                                    echo '<option '; 
+                                    if (isset($_POST['destino']) && $idNodo == $_POST['destino']) {
+                                        echo 'selected ';
+                                    }
+                                    echo 'value="'.$idNodo.'">'.$idNodo.'</option>';
                                 }
                             }
                         ?>
                     </select>
 
-				   <button class="btn btn-warning" type="submit" name="curta" style="height: 35px; border-radius: 5px; outline: none; background-color: #749BFF; width: 150px;">Rota Mais Curta</button>
+				   <button class="btn btn-warning" type="submit" name="curta" style="height: 35px; border-radius: 5px; outline: none; background-color: #749BFF; width: 150px;">Rota Padrão</button>
                    <button class="btn btn-warning" type="submit" name="acidente" style="height: 35px; border-radius: 5px; outline: none; background-color: #77BF3B; width: 150px;">Rota Sem Acidentes</button>
 
                 </p>
@@ -138,8 +147,19 @@ if (!empty($_POST)) {
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl8qjiJLd7KBxiKB0-2lRej5o96NYigIA&signed_in=true&callback=initMap" async defer></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+    <?php 
+        if (isset($_SESSION['alerta']) && $_SESSION['alerta'][0] == 'erro') {
+            echo "alert('".$_SESSION['alerta'][1]."')";
+            unset($_SESSION['alerta']);
+        }
+    ?>
+        
+    </script>
 
 </body>
 </html>
 
 <?php unset($_SESSION['dados_mapa_2']); ?>
+
+<?php if($retornoAstar){echoArray($retornoAstar);} ?>
