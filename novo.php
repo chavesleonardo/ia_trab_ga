@@ -1,15 +1,5 @@
 <?php
 
-ini_set('display_errors', 1);
-
-$idNodoInicial = 68;
-$idNodoFinal = 7;
-
-$retorno = a_star($idNodoInicial, $idNodoFinal);
-
-echoArray($retorno, true);
-
-
 function a_star($idNodoInicial, $idNodoFinal){
 
 	$chegouAoFim = false;
@@ -35,6 +25,7 @@ function a_star($idNodoInicial, $idNodoFinal){
 			# se a lista está OPEN está vazia, não há mais o que percorrer. Encerra tudo.
 	 		if ( empty($listaOpen) ) {
 		 		$chegouAoFim = true;
+		 		echo "<br>Lista OPEN vazia";
 		 		break;
 	 		}
 			
@@ -53,6 +44,7 @@ function a_star($idNodoInicial, $idNodoFinal){
 	 	if ($idMelhorNodo == $idNodoFinal) {
 	 		$listaCaminhoPercorrido = adicionarLista($listaCaminhoPercorrido, $idMelhorNodo);
 	 		$chegouAoFim = true;
+	 		echo "<br>Chegou ao destino";
 	 		break;
 	 	}
 
@@ -131,7 +123,117 @@ function a_star($idNodoInicial, $idNodoFinal){
 
 	return $arrayRetorno;
 
-}//end function
+}//end function a_star
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function shortest_way($idNodoOrigem, $idNodoDestino){
+
+	$coordenadasOrigem = getCoordenadasPorIdNodo($idNodoOrigem);
+	$coordenadasDestino = getCoordenadasPorIdNodo($idNodoDestino);
+
+	$_POST['coordenadasOrigem'] = $coordenadasOrigem['latitude'].','.$coordenadasOrigem['longitude'];
+	$_POST['coordenadasDestino'] = $coordenadasDestino['latitude'].','.$coordenadasDestino['longitude'];
+
+	$chegouAoFim = false;
+	$arrayCaminho = array();
+	$current = $idNodoOrigem;
+	$count = 0;
+
+	while (!$chegouAoFim) {
+
+		$arrayCaminho = adicionarLista($arrayCaminho, $current);
+
+		if ($current == $idNodoDestino) {
+			break;
+		}
+
+		//echo "Caminho:";print_r($arrayCaminho);
+
+		#lista os filhos
+		$filhosCurrent = listarFilhosPorIdNodo($current, $arrayCaminho, false);
+
+		//echoArray($filhosCurrent);
+
+		#busca a melhor opção entre os filhos
+		$current = getMelhorNodoFilho($filhosCurrent, $idNodoDestino);
+
+		//echo "Opção: $current<br/>";
+
+	}
+
+	if (!empty($arrayCaminho)) {
+		foreach ($arrayCaminho as $ordem => $idNodo) {
+
+			$dadosNodo = getCoordenadasPorIdNodo($idNodo);
+			$ultimo .= "{lat: ".$dadosNodo['latitude'].", lng: ".$dadosNodo['longitude']."}, ";
+		}
+	}
+
+	$_SESSION['dados_mapa_2'] = $ultimo;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function adicionarLista($lista, $item){
 	if (!in_array($item, $lista)) {
@@ -473,4 +575,34 @@ function trataResultBD($result){
 	    echo "Não foi possível executar a consulta no banco de dados: " . mysql_error();
 	    exit;
 	}
+}
+
+function getMelhorNodoFilho($listaFilhos, $idNodoDestino){
+
+	$melhorDistancia = 9999999;
+	$melhorIdFilho = 0;
+
+	$coordenadasDestino = getCoordenadasPorIdNodo($idNodoDestino);
+
+	foreach ($listaFilhos as $ordem => $idFilho) {
+
+		$coordenadasFilho = getCoordenadasPorIdNodo($idFilho);
+
+
+		$distancia = getDistance($coordenadasFilho['latitude'], 
+									  $coordenadasFilho['longitude'], 
+									  $coordenadasDestino['latitude'], 
+									  $coordenadasDestino['longitude']);
+
+		
+		//echo "Filho: $idFilho - Distancia: $distancia <br/>";
+		if ($melhorDistancia > $distancia) {
+			$melhorDistancia = $distancia;
+			$melhorIdFilho = $idFilho;
+		}
+
+	}	
+
+	return $melhorIdFilho;
+
 }
