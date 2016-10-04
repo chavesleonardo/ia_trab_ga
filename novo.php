@@ -2,10 +2,11 @@
 
 ini_set('display_errors', 1);
 
-$idNodoInicial = 36;
-$idNodoFinal = 5;
+$idNodoInicial = 68;
+$idNodoFinal = 7;
 
 $retorno = a_star($idNodoInicial, $idNodoFinal);
+
 echoArray($retorno, true);
 
 
@@ -28,12 +29,17 @@ function a_star($idNodoInicial, $idNodoFinal){
 
 	while (!$chegouAoFim) {
 
-		# busca o nodo com menos custo em $listaOpen
+		# só entrará aqui, se um nodo anterior não tinha filhos validos
 		if (!$idMelhorNodo) {
-	 		$idMelhorNodo = buscarNodoComMelhorCusto($listaOpen, $idNodoFinal);
-	 		if ($idMelhorNodo != 35 && $idMelhorNodo != 20 && $idMelhorNodo != 17  && $idMelhorNodo != 15) {
-	 			//exit($idMelhorNodo);
+
+			# se a lista está OPEN está vazia, não há mais o que percorrer. Encerra tudo.
+	 		if ( empty($listaOpen) ) {
+		 		$chegouAoFim = true;
+		 		break;
 	 		}
+			
+			# busca o nodo com menos custo em $listaOpen
+	 		$idMelhorNodo = buscarNodoComMelhorCusto($listaOpen, $idNodoFinal);
 			$listaCaminhoPercorrido = adicionarLista($listaCaminhoPercorrido, $idMelhorNodo);
 		}
 
@@ -56,24 +62,10 @@ function a_star($idNodoInicial, $idNodoFinal){
 	 	#calcula a melhor opção dos filhos
 	 	$idMelhorEscolhaDosFilhos = buscarNodoComMelhorCusto($listaFilhosMelhorNodo, $idNodoFinal);
 	 	
-	 	//if ($idMelhorNodo != 36 && $idMelhorNodo != 37 && $idMelhorNodo != 22 && $idMelhorNodo != 35 && $idMelhorNodo != 24 && $idMelhorNodo != 25 && $idMelhorNodo != 18 && $idMelhorNodo != 19  && $idMelhorNodo != 12 && $idMelhorNodo != 13 && $idMelhorNodo != 8) {
-	 	if ($idMelhorNodo != 36 && $idMelhorNodo != 37 && $idMelhorNodo != 22 && $idMelhorNodo != 35 && $idMelhorNodo != 24 && $idMelhorNodo != 25 && $idMelhorNodo != 18 && $idMelhorNodo != 19  && $idMelhorNodo != 12 && $idMelhorNodo != 13 && $idMelhorNodo != 8 && $idMelhorNodo != 7 && $idMelhorNodo != 20 && $idMelhorNodo != 17 && $idMelhorNodo != 16 && $idMelhorNodo != 26 && $idMelhorNodo != 27 && $idMelhorNodo != 15 && $idMelhorNodo != 28 && $idMelhorNodo != 31 && $idMelhorNodo != 30 && $idMelhorNodo != 40 && $idMelhorNodo != 39 && $idMelhorNodo != 44 && $idMelhorNodo != 46 && $idMelhorNodo != 52 && $idMelhorNodo != 53  && $idMelhorNodo != 54  && $idMelhorNodo != 55  && $idMelhorNodo != 56  && $idMelhorNodo != 68  && $idMelhorNodo != 67  && $idMelhorNodo != 66  && $idMelhorNodo != 65  && $idMelhorNodo != 59  && $idMelhorNodo != 50  && $idMelhorNodo != 51  && $idMelhorNodo != 49  && $idMelhorNodo != 48  && $idMelhorNodo != 61  && $idMelhorNodo != 41  && $idMelhorNodo != 43  && $idMelhorNodo != 64) {
-	 		
-	 		echo "<br>Filhos de $idMelhorNodo:";
-	 		echoArray($listaFilhosMelhorNodo);
-	 		echo "<br>Melhor escolha: $idMelhorEscolhaDosFilhos";
-	 		echo "<br>Percorrido:";
-	 		echoArray($listaCaminhoPercorrido);
-	 		echo "<br>Open:";
-	 		echoArray($listaOpen);
-	 		echo "<br>Closed:";
-	 		echoArray($listaClosed);
-	 		
-	 		exit;
-	 	}
-
+	 	#não achou filhos do nodo sem acidentes
  		if (!$listaFilhosMelhorNodo) {
 
+ 			#pega todos os filhos no nodo, incluindo os com acidentes, e salva como CLOSED
  			$listaFilhosMelhorNodoClosed = listarFilhosPorIdNodo($idMelhorNodo, $listaClosed, false);
 
 			$listaOpen = removerLista($listaOpen, $idMelhorNodo);
@@ -85,6 +77,7 @@ function a_star($idNodoInicial, $idNodoFinal){
  				}
  			}
 
+ 			#como este nodo não tem filhos uteis, seta o ponteiro corrente para vazio
  			$idMelhorNodo = false;
  		}
 
@@ -132,26 +125,13 @@ function a_star($idNodoInicial, $idNodoFinal){
 
 	}//end while
 
-
-
-
-
-
-
-
-
 	$arrayRetorno['listaOpen'] = $listaOpen;
 	$arrayRetorno['listaClosed'] = $listaClosed;
 	$arrayRetorno['listaCaminhoPercorrido'] = $listaCaminhoPercorrido;
 
 	return $arrayRetorno;
-	//echoArray($arrayRetorno, true);
 
 }//end function
-
-
-
-
 
 function adicionarLista($lista, $item){
 	if (!in_array($item, $lista)) {
@@ -339,20 +319,6 @@ function listarFilhosPorIdNodo($idNodo, $listaCaminhoPercorrido, $comLimite = tr
 	return (count($arrayRetorno > 0)) ? $arrayRetorno : false;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 * Salva informações em uma tabela temporária
