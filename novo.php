@@ -16,6 +16,8 @@ function a_star($idNodoInicial, $idNodoFinal){
 	$listaOpen = array();
 	$listaClosed = array();
 	$listaCaminhoPercorrido = array();
+	$listaTodosNodos = listarNodos();
+	$salvaExit= false;
 
 	# adiciona o ponto de partida na lista $listaClosed
 	array_push($listaOpen, $idNodoInicial);
@@ -27,7 +29,10 @@ function a_star($idNodoInicial, $idNodoFinal){
 	while (!$chegouAoFim) {
 
 		# busca o nodo com menos custo em $listaOpen
-	 	$idMelhorNodo = buscarNodoComMelhorCusto($listaOpen, $idNodoFinal);
+		if (!$idMelhorNodo) {
+	 		$idMelhorNodo = buscarNodoComMelhorCusto($listaOpen, $idNodoFinal);
+			array_push($listaCaminhoPercorrido, $idMelhorNodo);
+		}
 
 	 	# remove o $idMelhorNodo de $listaOpen
 	 	unset($listaOpen[$idMelhorNodo]);
@@ -43,15 +48,52 @@ function a_star($idNodoInicial, $idNodoFinal){
 	 	}
 
 	 	#lista os filhos de $idMelhorNodo
-	 	$listaFilhosMelhorNodo = listarFilhosPorIdNodo($idMelhorNodo, $listaCaminhoPercorrido);
+	 	$listaFilhosMelhorNodo = listarFilhosPorIdNodo($idMelhorNodo, $listaClosed);
+	 	
 	 	$idMelhorEscolhaDosFilhos = buscarNodoComMelhorCusto($listaFilhosMelhorNodo, $idNodoFinal);
 	 	
-	 	//if ($listaFilhosMelhorNodo) {
+	 	//if ($idMelhorNodo != 36 && $idMelhorNodo != 37 && $idMelhorNodo != 22 && $idMelhorNodo != 35 && $idMelhorNodo != 24 && $idMelhorNodo != 25 && $idMelhorNodo != 18 && $idMelhorNodo != 19  && $idMelhorNodo != 12  && $idMelhorNodo != 13 && $idMelhorNodo != 8) {
+	 	if ($idMelhorNodo != 36 && $idMelhorNodo != 37 && $idMelhorNodo != 22 && $idMelhorNodo != 35 && $idMelhorNodo != 24 && $idMelhorNodo != 25 && $idMelhorNodo != 18 && $idMelhorNodo != 19 && $idMelhorNodo != 12 ) {
+	 		echo "<br>Filhos de $idMelhorNodo:";
+	 		echoArray($listaFilhosMelhorNodo);
+	 		echo "<br>Melhor escolha:";
+	 		echoArray($idMelhorEscolhaDosFilhos);
+	 		echo "<br>Percorrido:";
+	 		echoArray($listaCaminhoPercorrido);
+	 		echo "<br>Open:";
+	 		echoArray($listaOpen);
+	 		echo "<br>Closed:";
+	 		echoArray($listaClosed);
+	 		
+	 		exit;
+	 	}
+
+ 		if (!$listaFilhosMelhorNodo) {
+ 			
+ 			$listaFilhosMelhorNodoClosed = listarFilhosPorIdNodo($idMelhorNodo, $listaCaminhoPercorrido, false);
+
+			$idkey = array_search($idMelhorNodo, $listaOpen);
+			unset($listaOpen[$idkey]);
+
+			$idkey2 = array_search($idMelhorNodo, $listaCaminhoPercorrido);
+			unset($listaCaminhoPercorrido[$idkey2]);
+ 			
+ 			if ($listaFilhosMelhorNodoClosed) {
+ 				foreach ($listaFilhosMelhorNodoClosed as $ordem => $idNodoClosed) {
+ 					array_push($listaClosed, $idNodoClosed);
+ 				}
+ 			}
+
+ 			$idMelhorNodo = false;
+ 		}
+
+		
+	 	if ($listaFilhosMelhorNodo && $idMelhorNodo) {
 
 		 	foreach ($listaFilhosMelhorNodo as $idFilhoMelhorNodo) {
 
 		 		$temFilhos = listarFilhosPorIdNodo($idFilhoMelhorNodo, $listaCaminhoPercorrido);
-		 
+
 		 		# *SE* $idFilhoMelhorNodo está em $listaClosed
 		 		# ou $idFilhoMelhorNodo nao possui filhos *ENTAO* pula para o próximo filho
 		 		if (!$temFilhos || in_array($idFilhoMelhorNodo, $listaClosed)) {
@@ -62,9 +104,6 @@ function a_star($idNodoInicial, $idNodoFinal){
 		 			# *SE* $idFilhoMelhorNodo tem o menor custo *E* idFilhoMelhorNodo
 		 			# não está em $listaOpen
 		 			if ( $idFilhoMelhorNodo == $idMelhorEscolhaDosFilhos) {
-
-		 				# set f_cost of neighbour ????
-		 				# ????????????????????????????
 
 		 				#  set parent of neighbour to current
 		 				$idkey = array_search($idMelhorNodo, $listaOpen);
@@ -81,13 +120,18 @@ function a_star($idNodoInicial, $idNodoFinal){
 		                # salva o melhor nodo na lista de caminhos percorridos
 		                array_push($listaCaminhoPercorrido, $idFilhoMelhorNodo);
 
+		 			}else{
+		 				if ( !in_array($idFilhoMelhorNodo, $listaOpen) ) {
+		                	array_push($listaOpen, $idFilhoMelhorNodo);
+		 				}
 		 			} //end last if
 		 			
 		 		}
 
 		 	} //end foreach
 
-	 	//}//if pre foreach
+
+	 	}//if pre foreach
 
 	}//end while
 
@@ -107,7 +151,80 @@ function a_star($idNodoInicial, $idNodoFinal){
 
 
 
+function listarNodos(){
 
+	$arrayRetorno = array(	1	 => array( 'id' =>	1	, 'latitude' => '-30.048088	', 'longitude' => '-51.227633	', 'acidentes' =>	12	),
+							2	 => array( 'id' =>	2	, 'latitude' => '-30.048237	', 'longitude' => '-51.225906	', 'acidentes' =>	0	),
+							3	 => array( 'id' =>	3	, 'latitude' => '-30.048372	', 'longitude' => '-51.224006	', 'acidentes' =>	6	),
+							4	 => array( 'id' =>	4	, 'latitude' => '-30.048463	', 'longitude' => '-51.222755	', 'acidentes' =>	0	),
+							5	 => array( 'id' =>	5	, 'latitude' => '-30.048554	', 'longitude' => '-51.221660	', 'acidentes' =>	4	),
+							6	 => array( 'id' =>	6	, 'latitude' => '-30.049112	', 'longitude' => '-51.227814	', 'acidentes' =>	7	),
+							7	 => array( 'id' =>	7	, 'latitude' => '-30.049196	', 'longitude' => '-51.226516	', 'acidentes' =>	0	),
+							8	 => array( 'id' =>	8	, 'latitude' => '-30.049317	', 'longitude' => '-51.225357	', 'acidentes' =>	0	),
+							9	 => array( 'id' =>	9	, 'latitude' => '-30.049452	', 'longitude' => '-51.224193	', 'acidentes' =>	15	),
+							10	 => array( 'id' =>	10	, 'latitude' => '-30.049707	', 'longitude' => '-51.221817	', 'acidentes' =>	0	),
+							11	 => array( 'id' =>	11	, 'latitude' => '-30.050842	', 'longitude' => '-51.221991	', 'acidentes' =>	8	),
+							12	 => array( 'id' =>	12	, 'latitude' => '-30.050593	', 'longitude' => '-51.224404	', 'acidentes' =>	0	),
+							13	 => array( 'id' =>	13	, 'latitude' => '-30.050474	', 'longitude' => '-51.225502	', 'acidentes' =>	0	),
+							14	 => array( 'id' =>	14	, 'latitude' => '-30.050274	', 'longitude' => '-51.227984	', 'acidentes' =>	7	),
+							15	 => array( 'id' =>	15	, 'latitude' => '-30.051318	', 'longitude' => '-51.228180	', 'acidentes' =>	0	),
+							16	 => array( 'id' =>	16	, 'latitude' => '-30.051472	', 'longitude' => '-51.226676	', 'acidentes' =>	0	),
+							17	 => array( 'id' =>	17	, 'latitude' => '-30.051570	', 'longitude' => '-51.225700	', 'acidentes' =>	0	),
+							18	 => array( 'id' =>	18	, 'latitude' => '-30.051663	', 'longitude' => '-51.225571	', 'acidentes' =>	0	),
+							19	 => array( 'id' =>	19	, 'latitude' => '-30.051714	', 'longitude' => '-51.224568	', 'acidentes' =>	0	),
+							20	 => array( 'id' =>	20	, 'latitude' => '-30.051937	', 'longitude' => '-51.222165	', 'acidentes' =>	0	),
+							21	 => array( 'id' =>	21	, 'latitude' => '-30.053246	', 'longitude' => '-51.222342	', 'acidentes' =>	8	),
+							22	 => array( 'id' =>	22	, 'latitude' => '-30.053148	', 'longitude' => '-51.223265	', 'acidentes' =>	0	),
+							23	 => array( 'id' =>	23	, 'latitude' => '-30.052999	', 'longitude' => '-51.224729	', 'acidentes' =>	4	),
+							24	 => array( 'id' =>	24	, 'latitude' => '-30.052929	', 'longitude' => '-51.225770	', 'acidentes' =>	0	),
+							25	 => array( 'id' =>	25	, 'latitude' => '-30.052344	', 'longitude' => '-51.225673	', 'acidentes' =>	0	),
+							26	 => array( 'id' =>	26	, 'latitude' => '-30.052251	', 'longitude' => '-51.226800	', 'acidentes' =>	0	),
+							27	 => array( 'id' =>	27	, 'latitude' => '-30.052181	', 'longitude' => '-51.227578	', 'acidentes' =>	0	),
+							28	 => array( 'id' =>	28	, 'latitude' => '-30.052135	', 'longitude' => '-51.228318	', 'acidentes' =>	0	),
+							29	 => array( 'id' =>	29	, 'latitude' => '-30.053128	', 'longitude' => '-51.228499	', 'acidentes' =>	6	),
+							30	 => array( 'id' =>	30	, 'latitude' => '-30.053188	', 'longitude' => '-51.227742	', 'acidentes' =>	0	),
+							31	 => array( 'id' =>	31	, 'latitude' => '-30.053262	', 'longitude' => '-51.226961	', 'acidentes' =>	0	),
+							32	 => array( 'id' =>	32	, 'latitude' => '-30.053889	', 'longitude' => '-51.228621	', 'acidentes' =>	0	),
+							33	 => array( 'id' =>	33	, 'latitude' => '-30.053997	', 'longitude' => '-51.227295	', 'acidentes' =>	7	),
+							34	 => array( 'id' =>	34	, 'latitude' => '-30.053983	', 'longitude' => '-51.227064	', 'acidentes' =>	6	),
+							35	 => array( 'id' =>	35	, 'latitude' => '-30.054081	', 'longitude' => '-51.225948	', 'acidentes' =>	0	),
+							36	 => array( 'id' =>	36	, 'latitude' => '-30.054186	', 'longitude' => '-51.224868	', 'acidentes' =>	0	),
+							37	 => array( 'id' =>	37	, 'latitude' => '-30.054353	', 'longitude' => '-51.223363	', 'acidentes' =>	0	),
+							38	 => array( 'id' =>	38	, 'latitude' => '-30.054432	', 'longitude' => '-51.222483	', 'acidentes' =>	4	),
+							39	 => array( 'id' =>	39	, 'latitude' => '-30.055411	', 'longitude' => '-51.222604	', 'acidentes' =>	0	),
+							40	 => array( 'id' =>	40	, 'latitude' => '-30.055224	', 'longitude' => '-51.225043	', 'acidentes' =>	0	),
+							41	 => array( 'id' =>	41	, 'latitude' => '-30.055021	', 'longitude' => '-51.227496	', 'acidentes' =>	0	),
+							42	 => array( 'id' =>	42	, 'latitude' => '-30.054910	', 'longitude' => '-51.228826	', 'acidentes' =>	7	),
+							43	 => array( 'id' =>	43	, 'latitude' => '-30.055755	', 'longitude' => '-51.227619	', 'acidentes' =>	0	),
+							44	 => array( 'id' =>	44	, 'latitude' => '-30.056006	', 'longitude' => '-51.225141	', 'acidentes' =>	0	),
+							45	 => array( 'id' =>	45	, 'latitude' => '-30.056507	', 'longitude' => '-51.227737	', 'acidentes' =>	4	),
+							46	 => array( 'id' =>	46	, 'latitude' => '-30.056721	', 'longitude' => '-51.225248	', 'acidentes' =>	0	),
+							47	 => array( 'id' =>	47	, 'latitude' => '-30.057153	', 'longitude' => '-51.229475	', 'acidentes' =>	9	),
+							48	 => array( 'id' =>	48	, 'latitude' => '-30.057240	', 'longitude' => '-51.228528	', 'acidentes' =>	0	),
+							49	 => array( 'id' =>	49	, 'latitude' => '-30.057303	', 'longitude' => '-51.227905	', 'acidentes' =>	0	),
+							50	 => array( 'id' =>	50	, 'latitude' => '-30.057355	', 'longitude' => '-51.227772	', 'acidentes' =>	0	),
+							51	 => array( 'id' =>	51	, 'latitude' => '-30.057439	', 'longitude' => '-51.226452	', 'acidentes' =>	0	),
+							52	 => array( 'id' =>	52	, 'latitude' => '-30.057532	', 'longitude' => '-51.225376	', 'acidentes' =>	0	),
+							53	 => array( 'id' =>	53	, 'latitude' => '-30.057604	', 'longitude' => '-51.224604	', 'acidentes' =>	0	),
+							54	 => array( 'id' =>	54	, 'latitude' => '-30.057671	', 'longitude' => '-51.224148	', 'acidentes' =>	0	),
+							55	 => array( 'id' =>	55	, 'latitude' => '-30.057671	', 'longitude' => '-51.223853	', 'acidentes' =>	0	),
+							56	 => array( 'id' =>	56	, 'latitude' => '-30.057778	', 'longitude' => '-51.222952	', 'acidentes' =>	0	),
+							57	 => array( 'id' =>	57	, 'latitude' => '-30.059120	', 'longitude' => '-51.224438	', 'acidentes' =>	5	),
+							58	 => array( 'id' =>	58	, 'latitude' => '-30.058988	', 'longitude' => '-51.225554	', 'acidentes' =>	4	),
+							59	 => array( 'id' =>	59	, 'latitude' => '-30.058774	', 'longitude' => '-51.226681	', 'acidentes' =>	0	),
+							60	 => array( 'id' =>	60	, 'latitude' => '-30.058574	', 'longitude' => '-51.227995	', 'acidentes' =>	5	),
+							61	 => array( 'id' =>	61	, 'latitude' => '-30.058451	', 'longitude' => '-51.228808	', 'acidentes' =>	0	),
+							62	 => array( 'id' =>	62	, 'latitude' => '-30.058363	', 'longitude' => '-51.229825	', 'acidentes' =>	19	),
+							63	 => array( 'id' =>	63	, 'latitude' => '-30.059440	', 'longitude' => '-51.230211	', 'acidentes' =>	4	),
+							64	 => array( 'id' =>	64	, 'latitude' => '-30.059729	', 'longitude' => '-51.228199	', 'acidentes' =>	0	),
+							65	 => array( 'id' =>	65	, 'latitude' => '-30.059892	', 'longitude' => '-51.226914	', 'acidentes' =>	0	),
+							66	 => array( 'id' =>	66	, 'latitude' => '-30.060031	', 'longitude' => '-51.225702	', 'acidentes' =>	0	),
+							67	 => array( 'id' =>	67	, 'latitude' => '-30.060170	', 'longitude' => '-51.224726	', 'acidentes' =>	0	),
+							68	 => array( 'id' =>	68	, 'latitude' => '-30.060349	', 'longitude' => '-51.223304	', 'acidentes' =>	0	) 
+	);
+
+    return $arrayRetorno;
+}
 
 /*
 * Retorna um ID de nodo considerado com menor custo dentre uma 
@@ -158,7 +275,7 @@ function buscarNodoComMelhorCusto($listaNodosDisponiveis, $idNodoDestino){
 /*
 * Retorna um array com nodos filhos de um determinado nodo
 */
-function listarFilhosPorIdNodo($idNodo, $listaCaminhoPercorrido){
+function listarFilhosPorIdNodo($idNodo, $listaCaminhoPercorrido, $comLimite = true){
 
 	$lista = '';
 	$separa = '';
@@ -187,6 +304,17 @@ function listarFilhosPorIdNodo($idNodo, $listaCaminhoPercorrido){
 		}
 		if ($row["id_nodo_2"] != $idNodo) {
 			array_push($arrayRetorno, $row["id_nodo_2"]);
+		}
+	}
+
+	# retira filhos que possuem mais que 4 acidentes
+	if (count($arrayRetorno) > 0 && $comLimite) {
+		$arrNodos = listarNodos();
+		
+		foreach ($arrayRetorno as $ordem => $idNd) {
+			if (intval($arrNodos[$idNd]['acidentes']) > 3) {
+				unset($arrayRetorno[$ordem]);
+			}
 		}
 	}
 
