@@ -1,8 +1,8 @@
 <?php
 
-error_reporting(E_ALL ^ E_DEPRECATED ^ E_WARNING ^ E_NOTICE); 
-ini_set("display_errors", 1);
-//error_reporting(0);
+//error_reporting(E_ALL ^ E_DEPRECATED ^ E_WARNING ^ E_NOTICE); 
+ini_set("display_errors", 0);
+error_reporting(0);
 
 ob_start();
 session_start();
@@ -51,6 +51,8 @@ if (!empty($_POST)) {
 <html>
 <head>
 	<meta charset="utf-8">
+    <link href="http://www.uniritter.edu.br/favicon.ico" type="image/x-icon" rel="icon" />
+    <link href="http://www.uniritter.edu.br/favicon.ico" type="image/x-icon" rel="shortcut icon" /> 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Trabalho I.A.</title>
     <style>
