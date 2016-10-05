@@ -138,7 +138,7 @@ function a_star($idNodoInicial, $idNodoFinal){
 			}
 
 			if ($ultimo) {
-				$_SESSION['dados_mapa_2'] = $ultimo;
+				$_SESSION['dados_rota_acidentes'] = $ultimo;
 				$coordenadasOrigem = getCoordenadasPorIdNodo($idNodoInicial);
 				$coordenadasDestino = getCoordenadasPorIdNodo($idNodoFinal);
 				$_POST['coordenadasOrigem'] = $coordenadasOrigem['latitude'].','.$coordenadasOrigem['longitude'];
@@ -200,7 +200,7 @@ function shortest_way($idNodoOrigem, $idNodoDestino){
 		}
 	}
 
-	$_SESSION['dados_mapa_2'] = $ultimo;
+	$_SESSION['dados_rota_padrao'] = $ultimo;
 	
 }
 
@@ -292,6 +292,18 @@ function listarNodos(){
 	);
 
     return $arrayRetorno;
+}
+
+function getNodosAcidente(){
+	$arrNodos = listarNodos();
+	$stringRetorno = '';
+	foreach ($arrNodos as $dadosNodo) {
+		if ($dadosNodo['acidentes'] > 3) {
+			$stringRetorno .= "['<b>".$dadosNodo['acidentes']."</b> Acidentes', ".$dadosNodo['latitude'].",".$dadosNodo['longitude']."],";
+		}
+	}
+
+	return $stringRetorno;
 }
 
 /*
@@ -553,6 +565,23 @@ function getDistance($latitude1, $longitude1, $latitude2, $longitude2) {
 	$d = $earth_radius * $c;
 
 	return $d;
+}
+
+function getRotaAleatoria(){
+
+	$sortRotas = array();
+
+	array_push($sortRotas, array('7' ,'15'));
+	array_push($sortRotas, array('7' ,'20'));
+	array_push($sortRotas, array('8' ,'43'));
+	//array_push($sortRotas, array('17','40'));
+	array_push($sortRotas, array('17','50'));
+	array_push($sortRotas, array('53','30'));
+	array_push($sortRotas, array('63','20'));
+	array_push($sortRotas, array('68','22'));
+
+	return $sortRotas[array_rand($sortRotas)];
+
 }
 
 /*
