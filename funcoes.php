@@ -124,11 +124,14 @@ function a_star($idNodoInicial, $idNodoFinal){
 
 	if ($alerta[0] == 'sucesso') {
 
-		$arrayRetorno['listaOpen'] = $listaOpen;
-		$arrayRetorno['listaClosed'] = $listaClosed;
-		$arrayRetorno['listaCaminhoPercorrido'] = $listaCaminhoPercorrido;
+		$arrayRetornoErro = array();
+		//$arrayRetornoErro['listaOpen'] = $listaOpen;
+		//$arrayRetornoErro['listaClosed'] = $listaClosed;
+		//$arrayRetornoErro['listaCaminhoPercorrido'] = $listaCaminhoPercorrido;
 
 		$arrayCaminho = reconstruct_path($listaCaminhoPercorrido);
+
+		$ultimo = false;
 
 		if (!empty($arrayCaminho)) {
 			foreach ($arrayCaminho as $nodoCoord) {
@@ -191,6 +194,8 @@ function shortest_way($idNodoOrigem, $idNodoDestino){
 		//echo "Opção: $current<br/>";
 
 	}
+
+	$ultimo = false;
 
 	if (!empty($arrayCaminho)) {
 		foreach ($arrayCaminho as $ordem => $idNodo) {

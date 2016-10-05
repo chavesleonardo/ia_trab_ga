@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(E_ALL ^ E_DEPRECATED); ini_set("display_errors", 1);
+
 ob_start();
 session_start();
 
@@ -293,7 +295,7 @@ if (!empty($_POST)) {
     unset($_SESSION['dados_rota_padrao']);
     unset($_SESSION['dados_rota_acidentes']);
 
-    if ($retornoAstar){
+    if (isset($retornoAstar)){
         echoArray($retornoAstar);
     }
 
