@@ -78,7 +78,7 @@ if (!empty($_POST)) {
 		<form action="" method="post" accept-charset="utf-8">
 			<div style="width: 100%; height: 50px;">
 				<p style="text-align: center;">
-                    <select id="selectorigem" name="origem" required="" style="background-color: #FDF669; height: 35px; border-radius: 5px; outline: none; width: 100px;">
+                    <select id="selectorigem" name="origem" required="" style="background-color: #6E99FF; height: 35px; border-radius: 5px; outline: none; width: 100px;">
                         <option value="">Origem</option>
                         <?php 
                             if ($arrSelectNodos) {
@@ -92,7 +92,7 @@ if (!empty($_POST)) {
                             }
                         ?>
                     </select>
-                    <select id="selectdestino" name="destino" required="" style="background-color: #6E99FF; height: 35px; border-radius: 5px; outline: none;  width: 100px;">
+                    <select id="selectdestino" name="destino" required="" style="background-color: #FDF669; height: 35px; border-radius: 5px; outline: none;  width: 100px;">
                         <option value="">Destino</option>
                         <?php 
                             if ($arrSelectNodos) {
