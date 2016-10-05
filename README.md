@@ -1,20 +1,11 @@
 # ia_trab_ga
 Trabalho do Grau A de Inteligência Artificial
 
-Cronograma
+Objetivo:
+Criar um algoritmo baseado em A\* que evite rotas que contenham mais de 3 acidentes.
 
-- 31/08/16 - VOTAÇÃO
-* Encontrar o bairro para desenvolver o trabalho;
-	* Vila Conceição;
+Descrição:
+Uma área de um bairro de Porto Alegre foi delimitada para obter-se os nodos de cada ponto. O bairro escolhido foi Menino Deus. Ao todo foram criados 68 nodos. Para cada nodo, foi verificado a quantidade de acidentes em um raio de 50 metros, visto que a base de acidentes não continha todas as coordenadas precisamente. O sistema irá exibir uma rota padrão e outra rota com o algoritmo modificado. Caso todas as rotas contenham mais de 3 acidentes o algoritmo é abortado, visto que não há alternativa.
 
-	
-	
-- 07/09/16 - VOTAÇÃO
-	* Pesquisar melhor forma de coletar as ruas (nodos) identificar esquinas para assim formar o grafo;
-		A principio estamos utilizando o http://www.openstreetmap.org/
-
-Wiki dos arquivos exportados em XML:
-http://wiki.openstreetmap.org/wiki/OSM_XML
-
-Wiki das tags contidas em cada XML:
-http://wiki.openstreetmap.org/wiki/Elements
+Desenvolvimento:
+Foi utilizado PHP para linguagem de programação com interface web HTML, JAVASCRIPT e CSS. Os nodos coletados foram armazenados em um banco de dados MySQL.
