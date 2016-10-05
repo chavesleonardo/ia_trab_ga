@@ -574,9 +574,12 @@ function getRotaAleatoria(){
 	array_push($sortRotas, array('7' ,'15'));
 	array_push($sortRotas, array('7' ,'20'));
 	array_push($sortRotas, array('8' ,'43'));
+	array_push($sortRotas, array('8' ,'64'));
+	array_push($sortRotas, array('8' ,'68'));
 	//array_push($sortRotas, array('17','40'));
 	array_push($sortRotas, array('17','50'));
 	array_push($sortRotas, array('53','30'));
+	array_push($sortRotas, array('63','8'));
 	array_push($sortRotas, array('63','20'));
 	array_push($sortRotas, array('68','22'));
 

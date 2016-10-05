@@ -11,6 +11,13 @@ $markerAcidentes = getNodosAcidente();
 
 if (!empty($_POST)) {
 
+    if ($_POST['origem'] == $_POST['destino']) {
+        $_SESSION['alerta'][0] = 'erro';
+        $_SESSION['alerta'][1] = 'Saia do lugar!';
+        header('Location: http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']);
+        exit;
+    }
+
     if (isset($_POST['acidente'])) {
         
         $idNodoInicial = $_POST['origem'];
@@ -65,7 +72,7 @@ if (!empty($_POST)) {
 		<form action="" method="post" accept-charset="utf-8">
 			<div style="width: 100%; height: 50px;">
 				<p style="text-align: center;">
-                    <select id="selectorigem" name="origem" required="" style="height: 35px; border-radius: 5px; outline: none; width: 100px;">
+                    <select id="selectorigem" name="origem" required="" style="background-color: #FDF669; height: 35px; border-radius: 5px; outline: none; width: 100px;">
                         <option value="">Origem</option>
                         <?php 
                             if ($arrSelectNodos) {
@@ -79,7 +86,7 @@ if (!empty($_POST)) {
                             }
                         ?>
                     </select>
-                    <select id="selectdestino" name="destino" required="" style="height: 35px; border-radius: 5px; outline: none;  width: 100px;">
+                    <select id="selectdestino" name="destino" required="" style="background-color: #6E99FF; height: 35px; border-radius: 5px; outline: none;  width: 100px;">
                         <option value="">Destino</option>
                         <?php 
                             if ($arrSelectNodos) {
@@ -95,8 +102,8 @@ if (!empty($_POST)) {
                     </select>
 
                    <button type="submit" name="acidente" style="height: 35px; border-radius: 5px; outline: none; background-color: #77BF3B; width: 125px;">Ver Rotas</button>
-				   <button type="submit" onclick="document.getElementById('selectdestino').value = '1'; document.getElementById('selectorigem').value = '1';" name="aleatorio" style="height: 35px; border-radius: 5px; outline: none; background-color: #749BFF; width: 125px;">Rota Aleatória</button>
-                   <button type="button" onclick="window.location.href = window.location.pathname" name="aleatorio" style="height: 35px; border-radius: 5px; outline: none; background-color: #CCC; width: 125px;">Limpar</button>
+				   <button type="submit" onclick="document.getElementById('selectdestino').value = '1'; document.getElementById('selectorigem').value = '2';" name="aleatorio" style="height: 35px; border-radius: 5px; outline: none; background-color: #749D7E; width: 125px;">Rota Aleatória</button>
+                   <button type="button" onclick="window.location.href = window.location.pathname" name="aleatorio" style="height: 35px; border-radius: 5px; outline: none; background-color: #EEE; width: 125px;">Limpar</button>
                 </p>
 			</div>
 		</form>
