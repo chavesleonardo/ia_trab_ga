@@ -3,7 +3,7 @@
 ob_start();
 session_start();
 
-require_once('novo.php');
+require_once('funcoes.php');
 
 $arrSelectNodos = listarNodos();
 
