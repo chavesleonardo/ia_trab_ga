@@ -1,6 +1,8 @@
 <?php
 
-error_reporting(E_ALL ^ E_DEPRECATED); ini_set("display_errors", 1);
+error_reporting(E_ALL ^ E_DEPRECATED ^ E_WARNING ^ E_NOTICE); 
+ini_set("display_errors", 1);
+//error_reporting(0);
 
 ob_start();
 session_start();
