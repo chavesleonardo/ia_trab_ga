@@ -37,7 +37,9 @@ function getRotaAleatoria(){
 	$sortRotas = array();
 
 	array_push($sortRotas, array('7' ,'15'));
+	array_push($sortRotas, array('7' ,'63'));
 	array_push($sortRotas, array('8' ,'43'));
+	array_push($sortRotas, array('8' ,'47'));
 	array_push($sortRotas, array('8' ,'64'));
 	array_push($sortRotas, array('8' ,'68'));
 	array_push($sortRotas, array('17','50'));
@@ -185,7 +187,8 @@ function new_a_star($startNode, $goalNode){
 		$filhosCurrent = $listaNodos[$idCurrent]['filhos'];
 
 		foreach ($filhosCurrent as $idFilhoCurrent => $distanciaFilhoCurrent) {
-			if($listaNodos[$idFilhoCurrent]['acidentes'] != 0){
+			if($listaNodos[$idFilhoCurrent]['acidentes'] != 0 &&
+				$idFilhoCurrent != $goalNode){
 				unset($filhosCurrent[$idFilhoCurrent]);
 			}
 		}
