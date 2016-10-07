@@ -37,7 +37,6 @@ function getRotaAleatoria(){
 	$sortRotas = array();
 
 	array_push($sortRotas, array('7' ,'15'));
-	array_push($sortRotas, array('7' ,'20'));
 	array_push($sortRotas, array('8' ,'43'));
 	array_push($sortRotas, array('8' ,'64'));
 	array_push($sortRotas, array('8' ,'68'));
@@ -175,7 +174,7 @@ function new_a_star($startNode, $goalNode){
 			#return reconstructPath($cameFrom, $idCurrent);
 			$rota = reconstructPath($cameFrom, $idCurrent);
 			$_SESSION['dados_rota_acidentes'] = desenhaRota($rota);
-
+			$encontrouRota = true;
 			$_POST['coordenadasOrigem'] = $listaNodos[$startNode]['latitude'].','.$listaNodos[$startNode]['longitude'];
 			$_POST['coordenadasDestino'] = $listaNodos[$goalNode]['latitude'].','.$listaNodos[$goalNode]['longitude'];
 
@@ -214,11 +213,16 @@ function new_a_star($startNode, $goalNode){
 
 			}
 
-		}
+		}//end foreach
 
+	}//end while
+
+	if (!isset($encontrouRota)) {
+		$_SESSION['alerta'][0] = 'erro';
+		$_SESSION['alerta'][1] = 'Não foi possível gerar uma rota sem acidentes';
 	}
 
-}//end a_star
+}//end new_a_star
 
 function getLowerCost($openSet, $fScore){
 	

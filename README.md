@@ -18,3 +18,9 @@ Foi utilizado PHP para linguagem de programação com interface web HTML, JAVASC
 **Bugs Encontrados**
 - Não calcula o *g(n)*.
 - Não adiciona fronteiras no open, dando a rota como encerrada e não encontrada.
+
+**Nova tentativa de correção de bugs criando um algoritmo baseado no seguinte pseudocódigo:**
+https://en.wikipedia.org/wiki/A*_search_algorithm#Pseudocode
+
+**LIVE DEMO**
+https://algoritmoastar.herokuapp.com/
