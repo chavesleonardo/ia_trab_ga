@@ -14,3 +14,7 @@ Foi utilizado PHP para linguagem de programação com interface web HTML, JAVASC
 - Obter uma lista precisa de nodos das ruas de porto alegre (muitos nodos estavam dentro de terrenos).
 - Coordenadas dos acidentes do *datapoa* continham muitas coordenadas imprecisas, necessitando buscar por um raio de 50 metros.
 - Conseguir gerar uma rota utilizando o sentido da via.
+
+**Bugs Encontrados**
+- Não calcula o *g(n)*.
+- Não adiciona fronteiras no open, dando a rota como encerrada e não encontrada.

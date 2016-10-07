@@ -1,8 +1,10 @@
 <?php
 
-//error_reporting(E_ALL ^ E_DEPRECATED ^ E_WARNING ^ E_NOTICE); 
 ini_set("display_errors", 0);
 error_reporting(0);
+
+//error_reporting(E_ALL);
+//ini_set("display_errors", 1);
 
 ob_start();
 session_start();
@@ -10,7 +12,6 @@ session_start();
 require_once('funcoes.php');
 
 $arrSelectNodos = listarNodos();
-
 $markerAcidentes = getNodosAcidente();
 
 if (!empty($_POST)) {
@@ -27,8 +28,8 @@ if (!empty($_POST)) {
         $idNodoInicial = $_POST['origem'];
         $idNodoFinal = $_POST['destino'];
         
-        $retornoAstar = a_star($idNodoInicial, $idNodoFinal);
-        $retorno = shortest_way($idNodoInicial, $idNodoFinal);
+        $retornoAstar = new_a_star($idNodoInicial, $idNodoFinal);
+        $retorno = a_star($idNodoInicial, $idNodoFinal);
 
     }
 
@@ -38,8 +39,8 @@ if (!empty($_POST)) {
         $_POST['origem'] = $idNodoInicial = $rotaAleatoria[0];
         $_POST['destino'] = $idNodoFinal = $rotaAleatoria[1];
         
-        $retornoAstar = a_star($idNodoInicial, $idNodoFinal);
-        $retorno = shortest_way($idNodoInicial, $idNodoFinal);
+        $retornoAstar = new_a_star($idNodoInicial, $idNodoFinal);
+        $retorno = a_star($idNodoInicial, $idNodoFinal);
 
     }
 
